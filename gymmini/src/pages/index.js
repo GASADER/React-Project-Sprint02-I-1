@@ -5,9 +5,11 @@ export default function Home() {
   return (
     <>
     <Navber/>
-    <div>
-      hi
-    </div>
+    <main>
+      <div className='sidebar'>sidebar</div>
+      <section className='feedsection'>section</section>
+      <div className='subbar'>subbar</div>
+    </main>
     </>
   )
 }

@@ -31,3 +31,25 @@ body {
     )
     rgb(var(--background-start-rgb)); */
 }
+
+main
+{
+  @apply flex gap-4 px-4 py-0 h-40;
+}
+
+.sidebar
+{
+  flex-grow: 1;
+  border: var(--border-debug)
+
+}
+.feedsection
+{
+  flex-grow: 5;
+  border: var(--border-debug)
+}
+.subbar
+{
+  flex-grow: 1;
+  border: var(--border-debug)
+}
