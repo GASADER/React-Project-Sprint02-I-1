@@ -1,0 +1,4 @@
+.nav-account-container
+{
+    @apply flex flex-row p-4;
+}   
