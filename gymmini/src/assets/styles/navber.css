@@ -1,4 +1,21 @@
+.nav
+{
+    @apply flex justify-between align-middle h-16;
+    border: var(--border-debug);
+}
+.logo-container
+{
+    @apply p-4;
+}
+#logoimg
+{
+    @apply w-full h-8;
+}
 .nav-account-container
 {
     @apply flex flex-row p-4;
-}   
+}
+.nav-link
+{
+    @apply flex flex-row gap-1;
+}
