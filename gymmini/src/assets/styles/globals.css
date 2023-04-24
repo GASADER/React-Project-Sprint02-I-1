@@ -31,3 +31,7 @@ body {
     )
     rgb(var(--background-start-rgb)); */
 }
+.debug
+{
+  border: var(--border-debug);
+}
