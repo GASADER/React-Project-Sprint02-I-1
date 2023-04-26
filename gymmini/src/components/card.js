@@ -1,6 +1,11 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faHeart
+} from "@fortawesome/free-solid-svg-icons"
+
 export default function Card() {
   return (
-    <div className="card border border-solid border-red-500 w-60 h-80">
+    <div className="card border border-solid border-red-500 w-60 h-80 ">
         <div className="cardHeader debug w-full h-8">
             <div className="card-profile-img-container">
                 <img src="" alt="" className="card-profile-img" />
@@ -22,7 +27,9 @@ export default function Card() {
         </div>
         <div className="cardFooter debug w-full h-8">
             <div>
-                <div className="card-like"></div>
+                <div className="card-like">
+                <FontAwesomeIcon icon={faHeart} style={{color: "#ff0000",}} />
+                </div>
                 <div className="card-comment"></div>
             </div>
             <div className="card-settiing"></div>
