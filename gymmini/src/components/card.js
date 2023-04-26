@@ -5,14 +5,14 @@ import {
 
 export default function Card() {
   return (
-    <div className="card border border-solid border-red-500 w-60 h-80 ">
+    <div className="card border border-solid border-red-500 h-auto ">
         <div className="cardHeader debug w-full h-8">
             <div className="card-profile-img-container">
                 <img src="" alt="" className="card-profile-img" />
             </div>
             <p className="profile-name"></p>
         </div>
-        <div className="cardSection debug w-full h-full">
+        <div className="cardSection debug w-full h-96">
             <div className="card-section-img">
 
             </div>
@@ -25,7 +25,7 @@ export default function Card() {
         <div className="cardContext debug w-full h-8">
             <div></div>
         </div>
-        <div className="cardFooter debug w-full h-8">
+        <div className="cardFooter debug w-full h-16">
             <div>
                 <div className="card-like">
                 <FontAwesomeIcon icon={faHeart} style={{color: "#ff0000",}} />

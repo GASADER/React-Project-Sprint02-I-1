@@ -1,7 +1,8 @@
 .nav
 {
-    @apply flex justify-between align-middle h-16;
+    @apply flex justify-between align-middle w-full h-16;
     border: var(--border-debug);
+    min-width: 375px;
 }
 .logo-container
 {

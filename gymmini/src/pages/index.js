@@ -8,7 +8,12 @@ export default function Home() {
     <Navber/>
     <main>
       <div className='sidebar'>sidebar</div>
-      <section className='feedsection'>section</section>
+      <section className='feedsection'>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+      </section>
       <div className='subbar'>subbar</div>
     </main>
     </>
