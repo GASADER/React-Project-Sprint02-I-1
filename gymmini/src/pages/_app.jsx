@@ -1,4 +1,5 @@
 //import fortawesome
+import React from 'react';
 import { config, library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css'

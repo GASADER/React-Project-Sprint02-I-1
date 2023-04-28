@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import Navber from '@/components/navber.js'
+import React from 'react'
+import Navber from '@/components/navber.jsx'
 import Card from '@/components/card'
 import Popover from '@/components/popover-card'
 
