@@ -2,6 +2,7 @@ import React from 'react'
 import Navber from '@/components/navber.jsx'
 import Card from '@/components/card'
 import Popover from '@/components/popover-card'
+import { MockdataProvider } from '@/context/cardContext'
 
 export default function Home() {
   return (
@@ -10,10 +11,9 @@ export default function Home() {
     <main>
       <div className='sidebar'>sidebar</div>
       <section className='feedsection'>
+    <MockdataProvider>
         <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
+    </MockdataProvider>
       </section>
       <div className='subbar'>subbar</div>
     </main>
