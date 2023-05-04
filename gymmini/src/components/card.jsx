@@ -36,24 +36,38 @@ export default function Card() {
             </div>
           </div>
           <div className="cardSection debug w-full h-auto debug relative">
-            <div className="card-section-img debug">
-              <img
-                src="https://source.unsplash.com/user/wsanter"
-                alt=""
-                className="card-section-img aspect-auto debug"
-              />
-            </div>
-            <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 text-white debug">
-              <div className="card-section-distance debug">
-                <FontAwesomeIcon icon={faRoad} />
-                distance
+            {item.sectionImg ? (
+              <div className="card-section-img debug">
+                <img
+                  src={item.sectionImg}
+                  alt=""
+                  className="aspect-auto debug"
+                />
+                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 text-white debug">
+                  <div className="card-section-distance debug">
+                    <FontAwesomeIcon icon={faRoad} />
+                    distance
+                  </div>
+                  <div className="card-section-duration debug">
+                    <FontAwesomeIcon icon={faClock} />
+                    duration
+                  </div>
+                  <button className="card-section-tag debug">tag</button>
+                </div>
               </div>
-              <div className="card-section-duration debug">
-                <FontAwesomeIcon icon={faClock} />
-                duration
-              </div>
-              <button className="card-section-tag debug">tag</button>
-            </div>
+            ) : (
+                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 text-white debug">
+                  <div className="card-section-distance debug">
+                    <FontAwesomeIcon icon={faRoad} />
+                    distance
+                  </div>
+                  <div className="card-section-duration debug">
+                    <FontAwesomeIcon icon={faClock} />
+                    duration
+                  </div>
+                  <button className="card-section-tag debug">tag</button>
+                </div>
+            )}
           </div>
           <div className="cardContext debug w-full h-auto debug">
             <div className="cardContext-container flex flex-col">
