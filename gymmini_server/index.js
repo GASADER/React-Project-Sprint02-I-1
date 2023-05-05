@@ -8,13 +8,31 @@ webServer.use(express.json());
 const ipAddress = "127.0.0.1";
 const port = 3001;
 
-const post = [];
+const post = [
+    {
+        id:0,
+        profileName:"Yasoo",
+        profileImg:"https://source.unsplash.com/user/wsanter",
+        // sectionImg:"https://source.unsplash.com/"
+    },
+    {
+        id:1,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/user/ws",
+        sectionImg:"https://source.unsplash.com/rendom"
+    }
+];
 
-webServer.post("/company", (request, response) => {
+webServer.post("/", (request, response) => {
     const name = request.body.name
     const age = request.body.age
     const postId = `companyId-${post.length + 1}`
     company.push({postId,name,age,taxId})
+    response.send(post);
+  });
+webServer.get("/", (request, response) => {
+    console.log("GET")
     response.send(post);
   });
 
