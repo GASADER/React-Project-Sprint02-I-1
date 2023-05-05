@@ -3,3 +3,7 @@
     max-width: 300px;
     width: 300px;
 }
+.card-section-info
+{
+    -webkit-text-stroke: 0.1px black;
+}
