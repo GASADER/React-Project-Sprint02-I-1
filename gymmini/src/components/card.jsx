@@ -19,79 +19,79 @@ export default function Card() {
     <>
       {mock.map((item) => (
         <div
-          className="card border border-solid border-red-500 h-auto flex flex-col "
+          className="card border border-solid border-black h-auto flex flex-col rounded-lg "
           key={item.id}
         >
-          <div className="cardHeader debug w-full h-auto flex justify-between ">
+          <div className="cardHeader w-full h-auto flex justify-between rounded-t-lg px-2 border border-black ">
             <div className="profilename flex items-center">
-              <div className="card-profile-img-container w-8 h-auto debug items-center  flex">
+              <div className="card-profile-img-container w-8 h-auto items-center  flex ">
                 <img
                   src={item.profileImg}
                   alt=""
-                  className="card-profile-img aspect-square debug"
+                  className="card-profile-img aspect-square rounded-full"
                 />
               </div>
-              <p className="profile-name debug">{item.profileName}</p>
+              <p className="profile-name px-2">{item.profileName}</p>
             </div>
             <Popover/>
           </div>
-          <div className="cardSection debug w-full h-auto debug relative">
+          <div className="cardSection  w-full h-auto relative border border-black">
             {item.sectionImg ? (
-              <div className="card-section-img debug">
+              <div className="card-section-img ">
                 <img
                   src={item.sectionImg}
                   alt=""
-                  className="aspect-auto debug"
+                  className="aspect-auto "
                 />
-                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 text-white debug">
-                  <div className="card-section-distance debug">
+                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 items-center text-white ">
+                  <div className="card-section-distance ">
                     <FontAwesomeIcon icon={faRoad} />
-                    distance
+                    {item.distance} hr
                   </div>
-                  <div className="card-section-duration debug">
+                  <div className="card-section-duration ">
                     <FontAwesomeIcon icon={faClock} />
-                    duration
+                    {item.duration} km
                   </div>
-                  <button className="card-section-tag debug">tag</button>
+                  <button className="card-section-tag  w-16 h-8">{item.tag}</button>
                 </div>
               </div>
             ) : (
-                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 text-white debug">
-                  <div className="card-section-distance debug">
+                <div className="card-section-info flex flex-col justify-center items-center h-auto bottom-0 w-full h-32  ">
+                  <div className="card-section-distance ">
                     <FontAwesomeIcon icon={faRoad} />
-                    distance
+                    {item.distance} hr
                   </div>
-                  <div className="card-section-duration debug">
+                  <div className="card-section-duration ">
                     <FontAwesomeIcon icon={faClock} />
-                    duration
+                    {item.duration} km
                   </div>
-                  <button className="card-section-tag debug">tag</button>
+                  <button className="card-section-tag  w-16 h-8">{item.tag}</button>
                 </div>
             )}
           </div>
-          <div className="cardContext debug w-full h-auto debug">
+          <div className="cardContext w-full h-auto ">
             <div className="cardContext-container flex flex-col">
               <div className="title-date flex justify-between">
-                <div className="title">We Can Do It!</div>
-                <div className="date">07/04/23</div>
+                <div className="title">{item.title}</div>
+                <div className="date">{item.date}</div>
               </div>
-              <div className="discaptions">View this so good @Kalifarrr</div>
+              <div className="discaptions">{item.discaptions}</div>
             </div>
           </div>
-          <div className="cardFooter debug w-full h-auto debug">
+          <div className="cardFooter w-full h-auto ">
             <div className="cardFooter-container flex justify-between">
               <div className="like-comment flex gap-2 ">
-                <div className="card-like debug">
+                <div className="card-like">
                   <FontAwesomeIcon
                     icon={faHeart}
                     style={{ color: "#ff0000" }}
                   />
                 </div>
-                <div className="card-comment debug">
+                <div className="card-comment">
                   <FontAwesomeIcon icon={faComment} />
                 </div>
               </div>
-              <div className="card-setting debug">
+              <div className="card-setting">
                 <FontAwesomeIcon icon={faGear} />
               </div>
             </div>
