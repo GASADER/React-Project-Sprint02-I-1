@@ -5,11 +5,13 @@ import {
   faClock,
   faRoad,
   faComment,
-  faEllipsisVertical,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
+import Popover from "./popover-card";
 
 import MockdataContext from "@/context/cardContext";
+
+
 
 export default function Card() {
   const mock = useContext(MockdataContext);
@@ -31,9 +33,7 @@ export default function Card() {
               </div>
               <p className="profile-name debug">{item.profileName}</p>
             </div>
-            <div className="ellipsis debug">
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </div>
+            <Popover/>
           </div>
           <div className="cardSection debug w-full h-auto debug relative">
             {item.sectionImg ? (

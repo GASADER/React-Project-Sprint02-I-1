@@ -4,6 +4,7 @@
 @import '../styles/navber.css';
 @import '../styles/varidation.css';
 @import './card.css';
+@import './popover-card.css';
 
 :root {
   --foreground-rgb: 0, 0, 0;

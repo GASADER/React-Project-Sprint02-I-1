@@ -1,5 +1,9 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEllipsisVertical} from "@fortawesome/free-solid-svg-icons";
+
+
 
 const Popover = () => {
   const [popoverShow, setPopoverShow] = React.useState(false);
@@ -7,7 +11,7 @@ const Popover = () => {
   const popoverRef = React.createRef();
   const openPopover = () => {
     createPopper(btnRef.current, popoverRef.current, {
-      placement: "left"
+      placement: "bottom"
     });
     setPopoverShow(true);
   };
@@ -16,33 +20,31 @@ const Popover = () => {
   };
   return (
     <>
-      <div className="flex flex-wrap">
-        <div className="w-full text-center">
+      <div className='flex flex-wrap p-0.5'>
+        <div className="w-full text-center flex">
           <button
-            className="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+            className=" hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
             onClick={() => {
               popoverShow ? closePopover() : openPopover();
             }}
             ref={btnRef}
           >
-            left indigo
+          <FontAwesomeIcon icon={faEllipsisVertical} />
           </button>
           <div
             className={
               (popoverShow ? "" : "hidden ") +
-              "bg-indigo-600 border-0 mr-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg"
+              "z-50 "
             }
             ref={popoverRef}
           >
-            <div>
-              <div
-                className="bg-indigo-600 text-white opacity-75 font-semibold p-3 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-t-lg"
-              >
-                indigo popover title
-              </div>
-              <div className="text-white p-3">
-                And here's some amazing content. It's very engaging. Right?
-              </div>
+            <div className="flex flex-col absolute right-0 bg-popover border-0 z-50 font-normal leading-normal text-sm max-w-xs text-right no-underline break-words rounded-l-lg">
+              <button className="hover:text-yellow-500 active:bg-yellow-500 rounded-tl-lg px-4 py-2">
+                Edit
+              </button>
+              <button className="hover:text-red-500 active:bg-red-500 rounded-bl-lg px-4 py-2">
+                Delete
+              </button>
             </div>
           </div>
         </div>
