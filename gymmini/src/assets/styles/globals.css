@@ -24,6 +24,7 @@ body {
   padding: 0;
   margin: 0 auto;
   box-sizing: border-box;
+  width: 100%;
   /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -34,7 +35,7 @@ body {
 }
 main
 {
-  @apply flex gap-4 px-4 py-0 w-full h-full;
+  @apply flex px-4 py-0 w-full h-full;
   max-width: 1440px;
   min-width: 375px;
   padding: 0;
@@ -45,30 +46,17 @@ main
 {
   flex-grow: 1;
   border: var(--border-debug);
-  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
   @media screen and (max-width:425px) {
     display: none;
   }
 }
 .feedsection
 {
-  flex-grow: 2;
   border: var(--border-debug);
-  padding: 1rem;
-  gap: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   margin: 0 auto;
-}
-.subbar
-{
-  flex-grow: 1;
-  border: var(--border-debug);
-  width: 250px;
-  @media screen and (max-width:768px) {
-    display: none;
-  }
+  width: 100%;
 }
 .debug
 {

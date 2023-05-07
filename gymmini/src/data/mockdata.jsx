@@ -5,13 +5,102 @@ export const mockdata = [
         profileName:"Yasoo",
         profileImg:"https://source.unsplash.com/user/wsanter",
         // sectionImg:"https://source.unsplash.com/"
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
     },
     {
         id:1,
         role:"user",
         profileName:"Alie",
-        profileImg:"https://source.unsplash.com/user/ws",
-        sectionImg:"https://source.unsplash.com/rendom"
-
-    }
+        profileImg:"https://source.unsplash.com/random/?city,night",
+        sectionImg:"https://source.unsplash.com/random/?night",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
+    {
+        id:2,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/random/?city",
+        sectionImg:"https://source.unsplash.com/random/?city,night",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
+    {
+        id:3,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/random/?city,night",
+        sectionImg:"https://source.unsplash.com/random/?city",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
+    {
+        id:3,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/random/?city,night",
+        sectionImg:"https://source.unsplash.com/random/?city",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
+    {
+        id:3,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/random/?city,night",
+        sectionImg:"https://source.unsplash.com/random/?city",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
+    {
+        id:3,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/random/?city,night",
+        sectionImg:"https://source.unsplash.com/random/?city",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
+    {
+        id:3,
+        role:"user",
+        profileName:"Alie",
+        profileImg:"https://source.unsplash.com/random/?city,night",
+        sectionImg:"https://source.unsplash.com/random/?city",
+        distance:1,
+        duration:2,
+        tag:"Running",
+        date:"07/12/22",
+        title:"We Can Do It!",
+        discaptions:"View this so good  @Kalifarrr"
+    },
 ]

@@ -19,7 +19,7 @@ export default function Card() {
     <>
       {mock.map((item) => (
         <div
-          className="card border border-solid border-black h-auto flex flex-col rounded-lg "
+          className="card border border-solid border-black h-auto flex flex-col rounded-lg flex-grow mb-4 "  
           key={item.id}
         >
           <div className="cardHeader w-full h-auto flex justify-between rounded-t-lg px-2 border border-black ">
@@ -43,33 +43,33 @@ export default function Card() {
                   alt=""
                   className="aspect-auto "
                 />
-                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 items-center text-white ">
+                <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 items-center text-white p-2 ">
                   <div className="card-section-distance ">
-                    <FontAwesomeIcon icon={faRoad} />
-                    {item.distance} hr
+                    <FontAwesomeIcon icon={faRoad} className="px-2" />
+                    {item.distance} km
                   </div>
                   <div className="card-section-duration ">
-                    <FontAwesomeIcon icon={faClock} />
-                    {item.duration} km
+                    <FontAwesomeIcon icon={faClock} className="px-2" />
+                    {item.duration} hr
                   </div>
                   <button className="card-section-tag  w-16 h-8">{item.tag}</button>
                 </div>
               </div>
             ) : (
-                <div className="card-section-info flex flex-col justify-center items-center bottom-0 w-full h-32  ">
+                <div className="card-section-info flex flex-col justify-center items-center bottom-0 w-full h-32 p-2">
                   <div className="card-section-distance ">
-                    <FontAwesomeIcon icon={faRoad} />
-                    {item.distance} hr
+                    <FontAwesomeIcon icon={faRoad} className="px-2" />
+                    {item.distance} km
                   </div>
                   <div className="card-section-duration ">
-                    <FontAwesomeIcon icon={faClock} />
-                    {item.duration} km
+                    <FontAwesomeIcon icon={faClock} className="px-2" />
+                    {item.duration} hr
                   </div>
                   <button className="card-section-tag  w-16 h-8">{item.tag}</button>
                 </div>
             )}
           </div>
-          <div className="cardContext w-full h-auto ">
+          <div className="cardContext w-full h-auto p-2 ">
             <div className="cardContext-container flex flex-col">
               <div className="title-date flex justify-between">
                 <div className="title">{item.title}</div>
@@ -78,7 +78,7 @@ export default function Card() {
               <div className="discaptions">{item.discaptions}</div>
             </div>
           </div>
-          <div className="cardFooter w-full h-auto ">
+          <div className="cardFooter w-full h-auto p-2 ">
             <div className="cardFooter-container flex justify-between">
               <div className="like-comment flex gap-2 ">
                 <div className="card-like">
