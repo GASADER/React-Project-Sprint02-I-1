@@ -56,7 +56,7 @@ export default function Card() {
                 </div>
               </div>
             ) : (
-                <div className="card-section-info flex flex-col justify-center items-center h-auto bottom-0 w-full h-32  ">
+                <div className="card-section-info flex flex-col justify-center items-center bottom-0 w-full h-32  ">
                   <div className="card-section-distance ">
                     <FontAwesomeIcon icon={faRoad} />
                     {item.distance} hr
