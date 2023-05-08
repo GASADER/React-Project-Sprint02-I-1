@@ -10,6 +10,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  background-color: #1F2021;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,12 +41,13 @@ main
   min-width: 375px;
   padding: 0;
   margin: 0 auto;
+  top: 4rem;
+  position: relative;
 }
 
 .sidebar
 {
   flex-grow: 1;
-  border: var(--border-debug);
   max-width: 200px;
   min-width: 200px;
   @media screen and (max-width:425px) {
@@ -54,7 +56,6 @@ main
 }
 .feedsection
 {
-  border: var(--border-debug);
   margin: 0 auto;
   width: 100%;
 }

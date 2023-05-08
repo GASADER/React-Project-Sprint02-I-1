@@ -2,7 +2,7 @@ import React from "react";
 export default function Navber() {
   return (
     <nav className="nav">
-      <div className="logo-container">
+      <div className="logo-container py-4 ">
         <a href="/">
           <img src="/" alt="logo" id="logoimg" />
         </a>
