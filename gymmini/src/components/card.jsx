@@ -19,10 +19,10 @@ export default function Card() {
     <>
       {mock.map((item) => (
         <div
-          className="card border-2 border-solid border-black h-auto flex flex-col rounded-3xl flex-grow mb-4 text-white"  
+          className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block"  
           key={item.id}
         >
-          <div className="cardHeader w-full h-auto flex justify-between rounded-t-3xl px-2 py-2  ">
+          <div className="cardHeader w-full h-auto flex justify-between rounded-t-3xl px-2 py-2 relative ">
             <div className="profilename flex items-center">
               <div className="card-profile-img-container w-8 h-auto items-center  flex ">
                 <img
@@ -72,7 +72,7 @@ export default function Card() {
           <div className="cardContext w-full h-auto p-2 text-white">
             <div className="cardContext-container flex flex-col">
               <div className="title-date flex justify-between">
-                <div className="title text-sm font-bold">{item.title}</div>
+                <div className="title text-xl font-bold">{item.title}</div>
                 <div className="date">{item.date}</div>
               </div>
               <div className="discaptions">{item.discaptions}</div>
@@ -81,19 +81,25 @@ export default function Card() {
           <div className="cardFooter w-full h-auto p-2 ">
             <div className="cardFooter-container flex justify-between p-2">
               <div className="like-comment flex gap-4 ">
+              <button>
                 <div className="card-like">
                   <FontAwesomeIcon
                     icon={faHeart}
                     style={{ color: "#ffffff" }}
                   />
                 </div>
+              </button>
+              <button>
                 <div className="card-comment">
                   <FontAwesomeIcon icon={faComment} style={{ color: "#ffffff" }} />
                 </div>
+              </button>
               </div>
+              <button>
               <div className="card-setting">
               <FontAwesomeIcon icon={faShare} style={{ color: "#ffffff" }}  />
               </div>
+              </button>
             </div>
           </div>
         </div>

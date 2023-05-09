@@ -23,7 +23,7 @@ const Popover = () => {
       <div className='flex flex-wrap p-0.5 '>
         <div className="w-full text-center flex">
           <button
-            className=" hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+            className=" hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 relative" type="button"
             onClick={() => {
               popoverShow ? closePopover() : openPopover();
             }}

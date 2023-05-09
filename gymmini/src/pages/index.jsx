@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <>
     <Navber/>
-    <main>
+    <main className=''>
       <div className='sidebar'>sidebar</div>
-      <section className='feedsection  lg:columns-3 md:columns-2 p-4'>
+      <section className='feedsection  lg:columns-3 md:columns-2 p-4 '>
     <MockdataProvider>
         <Card></Card>
     </MockdataProvider>

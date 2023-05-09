@@ -12,7 +12,7 @@ function Mockserver() {
 
   return (
     <>
-      <button onClick={getPost}>Get Company</button>
+      <button onClick={getPost}>Get Mock</button>
       {post.map((post) => {
         return (
           <div key={post.id}>
