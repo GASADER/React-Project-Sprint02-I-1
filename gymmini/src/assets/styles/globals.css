@@ -47,7 +47,6 @@ main
 {
   flex-grow: 2;
   max-width: 200px;
-  min-width: 200px;
   @media screen and (max-width:425px) {
     display: none;
   }
