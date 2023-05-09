@@ -19,10 +19,10 @@ export default function Card() {
     <>
       {mock.map((item) => (
         <div
-          className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block"  
+          className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block px-4"  
           key={item.id}
         >
-          <div className="cardHeader w-full h-auto flex justify-between rounded-t-3xl px-2 py-2 relative ">
+          <div className="cardHeader w-auto h-auto flex justify-between rounded-t-3xl px-2 py-2 ">
             <div className="profilename flex items-center">
               <div className="card-profile-img-container w-8 h-auto items-center  flex ">
                 <img

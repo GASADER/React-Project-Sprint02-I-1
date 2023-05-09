@@ -5,6 +5,8 @@
     background-color: #131414;
     position: fixed;
     z-index: 999;
+    position: sticky;
+    top:0;
 }
 .logo-container
 {

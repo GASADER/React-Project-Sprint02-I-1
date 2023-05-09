@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <section className="feedsection  lg:columns-3 md:columns-2 p-4 ">
+        <section className="lg:columns-3 md:columns-2 px-8 py-4 ">
           <MockdataProvider>
             <Card></Card>
           </MockdataProvider>

@@ -11,15 +11,13 @@ export default function Navber() {
       </div>
       <div className="nav-account-container">
         <p className="pr-2">Have an account?</p>
-        <ul className="nav-link">
-          <li className="text-red-500">
-            <Link href="/">Login</Link>
-          </li>
-          <p>or</p>
-          <li className="text-red-500">
-            <Link href="/">Register</Link>
-          </li>
-        </ul>
+        <Link className="text-red-500" href="/login">
+          Login
+        </Link>
+        <p> or </p>
+        <Link className="text-red-500" href="/register">
+          Register
+        </Link>
       </div>
     </nav>
   );
