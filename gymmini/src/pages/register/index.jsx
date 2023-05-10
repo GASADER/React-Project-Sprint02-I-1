@@ -4,10 +4,10 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 const userSchema = Yup.object().shape({
-
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
+    .matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Password cannot contain special characters")
     .required("Required"),
   firstName: Yup.string()
     .max(50, "Must be 50 characters or less")
@@ -15,15 +15,14 @@ const userSchema = Yup.object().shape({
   lastName: Yup.string()
     .max(50, "Must be 50 characters or less")
     .required("Required"),
-  birthDate: Yup.date().required("Required"),
+  birthDate: Yup.date()
+    .required("Required")
+    .max(new Date(), "Birth date can't be in the future")
+    .min(new Date("1900-01-01"), "Invalid birth date"),
   gender: Yup.string().oneOf(["male", "female", "other"]).required("Required"),
   city: Yup.string().required("Required"),
-  height: Yup.number()
-    .max(300, "Over 300 ")
-    .required("Required"),
-  weight: Yup.number()
-    .max(300, "Over 300 ")
-    .required("Required"),
+  height: Yup.number().max(300, "Over 300 ").required("Required"),
+  weight: Yup.number().max(300, "Over 300 ").required("Required"),
   profileName: Yup.string().required("Required"),
   profileImage: Yup.mixed()
     .test("fileSize", "File size is too large", (value) => {
@@ -35,7 +34,6 @@ const userSchema = Yup.object().shape({
       );
     })
     .required("Required"),
-
 });
 
 export default function register() {
@@ -66,14 +64,14 @@ export default function register() {
             {({ errors, touched, setFieldValue }) => (
               <Form className="flex flex-col gap-2">
                 <div className="container flex gap-4 ">
-                <label htmlFor="firstName" className="text-white ">
-                  First Name
-                </label>{errors.firstName && touched.firstName ? (
-                  <div className=" text-red-500">{errors.firstName}</div>
-                ) : null}
+                  <label htmlFor="firstName" className="text-white ">
+                    First Name
+                  </label>
+                  {errors.firstName && touched.firstName ? (
+                    <div className=" text-red-500">{errors.firstName}</div>
+                  ) : null}
                 </div>
-                <Field name="firstName" /> 
-                
+                <Field name="firstName" />
 
                 <label htmlFor="lastName" className="text-white">
                   Last Name
@@ -92,7 +90,7 @@ export default function register() {
                 ) : null}
 
                 <label htmlFor="password" className="text-white">
-                Password
+                  Password
                 </label>
                 <Field name="password" type="password" />
                 {errors.password && touched.password ? (
@@ -117,7 +115,9 @@ export default function register() {
                   )}
                 </Field>
 
-                <label htmlFor="gender" className="text-white">Gender</label>
+                <label htmlFor="gender" className="text-white">
+                  Gender
+                </label>
                 <Field className="text-black" name="gender" as="select">
                   <option value="">Select a gender</option>
                   <option value="male">Male</option>
@@ -128,22 +128,30 @@ export default function register() {
                   <div>{errors.gender}</div>
                 ) : null}
 
-                <label htmlFor="city" className="text-white">City</label>
+                <label htmlFor="city" className="text-white">
+                  City
+                </label>
                 <Field name="city" />
                 {errors.city && touched.city ? <div>{errors.city}</div> : null}
 
-                <label htmlFor="height" className="text-white">Height</label>
+                <label htmlFor="height" className="text-white">
+                  Height
+                </label>
                 <Field name="height" type="number" />
                 {errors.height && touched.height ? (
                   <div>{errors.height}</div>
                 ) : null}
 
-                <label htmlFor="weight" className="text-white">Weight</label>
+                <label htmlFor="weight" className="text-white">
+                  Weight
+                </label>
                 <Field name="weight" type="number" />
                 {errors.weight && touched.weight ? (
                   <div>{errors.weight}</div>
                 ) : null}
-                <label htmlFor="profileName" className="text-white">ProfileName</label>
+                <label htmlFor="profileName" className="text-white">
+                  ProfileName
+                </label>
                 <Field name="profileName" />
                 {errors.profileName && touched.profileName && (
                   <div>{errors.profileName}</div>
