@@ -16,7 +16,7 @@ import MockdataContext from "@/context/cardContext";
 export default function Card() {
   const mock = useContext(MockdataContext);
   return (
-    <>
+    <div className="cardContainer lg:columns-3 md:columns-2 py-4 px-2">
       {mock.map((item) => (
         <div
           className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block px-2 "  
@@ -104,6 +104,6 @@ export default function Card() {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

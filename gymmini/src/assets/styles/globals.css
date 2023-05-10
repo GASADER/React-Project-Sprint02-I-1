@@ -36,7 +36,7 @@ body {
 }
 main
 {
-  @apply flex px-4 py-0 w-full h-full;
+  @apply flex w-full h-full;
   max-width: 1440px;
   min-width: 375px;
   padding: 0;
@@ -45,7 +45,7 @@ main
 
 .sidebar
 {
-  flex-grow: 2;
+  flex-grow: 1;
   max-width: 200px;
   @media screen and (max-width:425px) {
     display: none;
@@ -53,6 +53,7 @@ main
 }
 section
 {
+  flex-grow: 4;
   margin: 0 auto;
   width: 100%;
 }

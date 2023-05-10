@@ -8,12 +8,10 @@ import { MockdataProvider } from "@/context/cardContext";
 export default function Home() {
   return (
     <>
-      <Layout>
-        <section className="lg:columns-3 md:columns-2 py-4 ">
+      <Layout> 
           <MockdataProvider>
             <Card></Card>
           </MockdataProvider>
-        </section>
       </Layout>
 
       <Mockserver />
