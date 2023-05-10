@@ -16,13 +16,13 @@ import MockdataContext from "@/context/cardContext";
 export default function Card() {
   const mock = useContext(MockdataContext);
   return (
-    <div className="cardContainer lg:columns-3 md:columns-2 py-4 px-2">
+    <>
       {mock.map((item) => (
         <div
-          className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block px-2 "  
+          className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block"  
           key={item.id}
         >
-          <div className="cardHeader w-auto h-auto flex justify-between rounded-t-3xl px-2 py-2 ">
+          <div className="cardHeader w-full h-auto flex justify-between rounded-t-3xl px-2 py-2 relative ">
             <div className="profilename flex items-center">
               <div className="card-profile-img-container w-8 h-auto items-center  flex ">
                 <img
@@ -104,6 +104,6 @@ export default function Card() {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 }

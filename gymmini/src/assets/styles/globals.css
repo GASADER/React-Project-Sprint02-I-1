@@ -36,24 +36,26 @@ body {
 }
 main
 {
-  @apply flex w-full h-full;
+  @apply flex px-4 py-0 w-full h-full;
   max-width: 1440px;
   min-width: 375px;
   padding: 0;
   margin: 0 auto;
+  top: 4rem;
+  position: relative;
 }
 
 .sidebar
 {
   flex-grow: 1;
   max-width: 200px;
+  min-width: 200px;
   @media screen and (max-width:425px) {
     display: none;
   }
 }
-section
+.feedsection
 {
-  flex-grow: 4;
   margin: 0 auto;
   width: 100%;
 }
