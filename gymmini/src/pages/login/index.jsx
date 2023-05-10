@@ -1,8 +1,9 @@
 import React from "react";
 import Layout from "@/components/layout";
 import Mockserver from "@/components/mock";
+import { useForm } from "react-hook-form";
 
-export default function Home() {
+export default function login() {
   return (
     <>
       <Layout>
