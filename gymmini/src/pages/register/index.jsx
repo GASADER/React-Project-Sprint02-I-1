@@ -74,30 +74,36 @@ export default function register() {
                 </div>
                 <Field name="firstName" /> 
                 
-
+                <div className="container flex gap-4 ">
                 <label htmlFor="lastName" className="text-white">
                   Last Name
                 </label>
-                <Field name="lastName" />
                 {errors.lastName && touched.lastName ? (
-                  <div>{errors.lastName}</div>
+                  <div className=" text-red-500">{errors.lastName}</div>
                 ) : null}
+                </div>
+                <Field name="lastName" />
 
+                <div className="container flex gap-4 ">
                 <label htmlFor="email" className="text-white">
                   Email
                 </label>
-                <Field name="email" type="email" />
                 {errors.email && touched.email ? (
-                  <div>{errors.email}</div>
+                  <div className="text-red-500">{errors.email}</div>
                 ) : null}
+                </div>
+                <Field name="email" type="email" />
 
+                <div className="container flex gap-4 ">
                 <label htmlFor="password" className="text-white">
                 Password
                 </label>
-                <Field name="password" type="password" />
                 {errors.password && touched.password ? (
-                  <div>{errors.password}</div>
+                  <div className="text-red-500">{errors.password}</div>
                 ) : null}
+                </div>
+                <Field name="password" type="password" />
+
 
                 <Field name="birthDate">
                   {({ field }) => (
@@ -111,12 +117,13 @@ export default function register() {
                         max={new Date().toISOString().split("T")[0]} // set max to today's date
                       />
                       {errors.birthDate && touched.birthDate ? (
-                        <div>{errors.birthDate}</div>
+                        <div className="text-red-500">{errors.birthDate}</div>
                       ) : null}
                     </div>
                   )}
                 </Field>
 
+                <div className="container flex gap-4 ">
                 <label htmlFor="gender" className="text-white">Gender</label>
                 <Field className="text-black" name="gender" as="select">
                   <option value="">Select a gender</option>
@@ -125,30 +132,41 @@ export default function register() {
                   <option value="other">Other</option>
                 </Field>
                 {errors.gender && touched.gender ? (
-                  <div>{errors.gender}</div>
+                  <div className="text-red-500">{errors.gender}</div>
                 ) : null}
+                </div>
 
+                <div className="container flex gap-4 ">
                 <label htmlFor="city" className="text-white">City</label>
                 <Field name="city" />
-                {errors.city && touched.city ? <div>{errors.city}</div> : null}
+                {errors.city && touched.city ? <div className="text-red-500">{errors.city}</div> : null}
+                </div>
 
+                <div className="container flex gap-4">
                 <label htmlFor="height" className="text-white">Height</label>
                 <Field name="height" type="number" />
                 {errors.height && touched.height ? (
-                  <div>{errors.height}</div>
+                  <div className="text-red-500">{errors.height}</div>
                 ) : null}
+                </div>
 
+                <div className="container flex gap-40">
                 <label htmlFor="weight" className="text-white">Weight</label>
                 <Field name="weight" type="number" />
                 {errors.weight && touched.weight ? (
-                  <div>{errors.weight}</div>
+                  <div className="text-red-500">{errors.weight}</div>
                 ) : null}
+                </div>
+
+                <div className="container flex gap-40">
                 <label htmlFor="profileName" className="text-white">ProfileName</label>
                 <Field name="profileName" />
                 {errors.profileName && touched.profileName && (
-                  <div>{errors.profileName}</div>
+                  <div className="text-red-500">{errors.profileName}</div>
                 )}
+                </div>
 
+                  <div>
                 <Field name="profileImage">
                   {({ field }) => (
                     <div>
@@ -163,12 +181,14 @@ export default function register() {
                         }
                       />
                       {errors.profileImage && touched.profileImage ? (
-                        <div>{errors.profileImage}</div>
+                        <div className="text-red-500">{errors.profileImage}</div>
                       ) : null}
                     </div>
                   )}
                 </Field>
-
+                </div>
+                    
+                
                 <button type="submit">Submit</button>
               </Form>
             )}
