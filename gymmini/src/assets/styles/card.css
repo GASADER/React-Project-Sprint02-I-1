@@ -1,0 +1,10 @@
+.card
+{
+    min-width: 240px;
+    width: auto;
+    background-color: #141414;
+}
+.card-section-info
+{
+    -webkit-text-stroke: 0.1px black;
+}

@@ -1,0 +1,26 @@
+.nav
+{
+    @apply flex justify-between align-middle w-full h-16 text-white;
+    min-width: 375px;
+    background-color: #131414;
+    position: fixed;
+    z-index: 999;
+    position: sticky;
+    top:0;
+}
+.logo-container
+{
+    @apply p-4;
+}
+#logoimg
+{
+    @apply w-full h-8;
+}
+.nav-account-container
+{
+    @apply flex flex-row p-4;
+}
+.nav-link
+{
+    @apply flex flex-row gap-1;
+}
