@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "@/components/layout";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const userSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -56,9 +57,10 @@ export default function register() {
               profileImage: "",
             }}
             validationSchema={userSchema}
-            onSubmit={(values) => {
-              // same shape as initial values
-              console.log(values);
+            onSubmit={(values) = async() => {
+              const response = await axios.get("http://127.0.0.1:3001/users");
+    console.log(response.values);
+    setUsers(response.values);
             }}
           >
             {({ errors, touched, setFieldValue }) => (

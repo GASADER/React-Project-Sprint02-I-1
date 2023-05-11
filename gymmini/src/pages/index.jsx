@@ -4,6 +4,7 @@ import Mockserver from "@/components/mock";
 import Layout from "@/components/layout";
 
 import { MockdataProvider } from "@/context/cardContext";
+import Upload from "@/components/mockphoto";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       </Layout>
 
       <Mockserver />
+      <Upload/>
     </>
   );
 }

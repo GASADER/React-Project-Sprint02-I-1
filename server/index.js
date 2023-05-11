@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import 'dotenv/config.js'
 import routers from "./routers/router.js";
+import cloudinary from "./service/cloudniary.js";
 
 const app = express();
 const corsOptions = {
@@ -10,7 +11,8 @@ const corsOptions = {
   };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }))
 
 const ipAddress = process.env.API_IPADDRESS;
 const port = process.env.API_PORT;
