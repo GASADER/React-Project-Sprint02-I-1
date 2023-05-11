@@ -4,7 +4,12 @@ import 'dotenv/config.js'
 import routers from "./routers/router.js";
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+  };
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const ipAddress = process.env.API_IPADDRESS;

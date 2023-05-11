@@ -6,7 +6,9 @@ const router = express.Router()
 
 router.get("/", getall)
 router.post("/",(req,res) =>{
-    res.send(post)
+    const img = req.body
+    console.log(img)
+    res.send("post")
 })
 
 export default router
