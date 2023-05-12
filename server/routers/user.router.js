@@ -1,6 +1,5 @@
 import express from "express";
 import { getall } from "../controllers/user.controller.js";
-import { post } from "../models/mockdata.js";
 import cloudinary from "../service/cloudniary.js";
 
 const router = express.Router();
@@ -16,8 +15,11 @@ router.post("/", (req, res) => {
 router.put("/", async (req, res) => {
   try {
     const fileStr = req.body.data;
+    //upload API
+    //https://cloudinary.com/documentation/image_upload_api_reference
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-      public_id: "olympic_flag",
+      folder:"profile_pic",
+      width:"800"
     });
     console.log(uploadedResponse);
     res.json({ msg: "Upload complete" });

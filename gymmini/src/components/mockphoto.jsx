@@ -1,46 +1,44 @@
-import React, { useState } from 'react';
-import Axios from 'axios';
-import { AdvancedImage } from '@cloudinary/react';
-import { Cloudinary } from '@cloudinary/url-gen';
+import React, { useState } from "react";
+import Axios from "axios";
+import { AdvancedImage, Placeholder } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 export default function Upload() {
-    Axios.defaults.withCredentials = true;
-    const [imageFile, setImageFile] = useState('');
+  Axios.defaults.withCredentials = true;
+  const [imageFile, setImageFile] = useState("");
+  const [previewImage, setPreviewImage] = useState("");
 
-    const handleFileInputChange = (e) => {
+  const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-        setImageFile(reader.result);
-    }
-}
+      setImageFile(reader.result);
+      setPreviewImage(reader.result); // Set the preview image
+    };
+  };
 
-const handleSubmitFile = (e) => {
+  const handleSubmitFile = (e) => {
     e.preventDefault();
     if (!imageFile) return;
-    Axios.put("http://127.0.0.1:3001/user", { data: imageFile});
-}
+    Axios.put("http://127.0.0.1:3001/user", { data: imageFile }).then(() => {
+        setPreviewImage("");
+    });
+  };
 
-const cld = new Cloudinary({
+  const cld = new Cloudinary({
     cloud: {
-      cloudName: 'dtg5nqs9s'
-    }
+      cloudName: "dtg5nqs9s",
+    },
   });
-const myImage = cld.image('olympic_flag');
 
-return (
+  return (
     <div>
-        <form onSubmit={handleSubmitFile}>
-            <input
-                type="file"
-                onChange={handleFileInputChange}
-            />
-            <button type="submit">
-                submit
-            </button>
-            <AdvancedImage cldImg={myImage} />
-         </form >
-     </div >
-  )
+      <form onSubmit={handleSubmitFile}>
+        {previewImage && <img src={previewImage} alt="Preview" />}
+        <input type="file" onChange={handleFileInputChange} />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 }
