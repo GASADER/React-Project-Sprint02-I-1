@@ -4,7 +4,8 @@ import { mockdata } from "@/data/mockdata";
 import Card from "@/components/card";
 
 export default function login() {
-  const item = mockdata[3];
+  const item = mockdata.find((item) => item.id === 3);
+  const card = mockdata.filter((item) => item.id === 3);
 
   return (
     <>
@@ -42,7 +43,8 @@ export default function login() {
               </div>
             </div>
             <div className="w-full border border-white "></div>
-            <Card/>
+            <div className="yourPost px-8 py-4">YourPost</div>
+            <Card prop={card} />
           </div>
         </div>
       </Layout>
