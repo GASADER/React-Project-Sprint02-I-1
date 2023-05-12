@@ -1,7 +1,22 @@
 {
   "dependencies": {
+    "cloudinary": "^1.36.4",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

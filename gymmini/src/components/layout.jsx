@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navber from "./navber";
 
 const Layout = ({ children }) => {
@@ -5,7 +6,7 @@ const Layout = ({ children }) => {
     <div>
       <Navber />
       <main className="mx-auto flex">
-        <div className="sidebar w-36 lg:w-48">sidebar</div>
+        <Link href="/profile" className="sidebar w-36 lg:w-48">sidebar</Link>
         <section className="">
           {children}
         </section>
