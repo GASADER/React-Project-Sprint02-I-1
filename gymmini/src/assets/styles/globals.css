@@ -5,6 +5,7 @@
 @import '../styles/varidation.css';
 @import './card.css';
 @import './popover-card.css';
+@import './profile.css';
 
 :root {
   --foreground-rgb: 0, 0, 0;
