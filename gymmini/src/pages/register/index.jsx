@@ -58,7 +58,7 @@ export default function register() {
         values.profileImage = base64;
       }
 
-      const response = await axios.put("http://127.0.0.1:3001/users", values);
+      const response = await axios.post("http://127.0.0.1:3001/users", values);
       console.log(response.data);
     } catch (error) {
       console.error(error);

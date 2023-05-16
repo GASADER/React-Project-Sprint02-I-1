@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", getall);
 
-router.put("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const data = req.body;
   const fileStr = req.body.profileImage;
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
@@ -18,7 +18,7 @@ router.put("/", async (req, res) => {
   res.json(data)
 });
 
-router.post("/", async (req, res) => {
+router.put("/", async (req, res) => {
   try {
     const fileStr = req.body.data;
     //upload API
