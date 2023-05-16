@@ -7,15 +7,15 @@ const router = express.Router();
 router.get("/", getall);
 
 router.put("/", async (req, res) => {
-  const img = req.body;
-  console.log(img)
+  const data = req.body;
   const fileStr = req.body.profileImage;
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
     folder:"profile_pic",
     width:"800"
   });
-  console.log(uploadedResponse);
-  res.json(img)
+  data.profileImage = uploadedResponse.url
+  console.log(data);
+  res.json(data)
 });
 
 router.post("/", async (req, res) => {

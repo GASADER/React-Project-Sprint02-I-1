@@ -40,11 +40,25 @@ const userSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export default function register() {
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
+export default function register() {
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.put("http://127.0.0.1:3001/users",values);
+      const file = values.profileImage;
+      if (file) {
+        const base64 = await readFileAsBase64(file);
+        values.profileImage = base64;
+      }
+
+      const response = await axios.put("http://127.0.0.1:3001/users", values);
       console.log(response.data);
     } catch (error) {
       console.error(error);
