@@ -4,7 +4,7 @@ function routers(app) {
   app.get("/", (req, res) => {
     res.send("GET")
   });
-  app.use("/user", UserRouter)
+  app.use("/users", UserRouter)
 }
 export default routers;
 
