@@ -12,14 +12,14 @@ const postSchema = Yup.object().shape({
     "Swimming",
     "Hiking",
     "Running",
-  ]),
-  distance: Yup.number().required(),
+  ]).required("Required"),
+  distance: Yup.number().max(30, "Over 30 ").required("Required"),
   duration: Yup.object().shape({
-    hr: Yup.number().required("Hours is required"),
-    min: Yup.number().required("Minutes is required"),
+    hr: Yup.number().max(24, "Over 24 ").required("Required"),
+    min: Yup.number().max(60, "Over 60 ").required("Required"),
   }),
-  title: Yup.string().required(),
-  description: Yup.string().required(),
+  title: Yup.string().matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Cannot contain special characters").max(20, "Must be 20 characters or less").required("Required"),
+  description: Yup.string().matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Cannot contain special characters").max(220, "Must be 220 characters or less").required("Required"),
 });
 
 
