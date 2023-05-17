@@ -4,18 +4,28 @@ import cloudinary from "../service/cloudniary.js";
 
 const router = express.Router();
 
-router.get("/", getall);
-
-router.post("/", async (req, res) => {
+// router.get("/", getall);
+router.get("/", async (req, res) => {
   const data = req.body;
-  const fileStr = req.body.profileImage;
-  const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-    folder:"profile_pic",
-    width:"800"
-  });
-  data.profileImage = uploadedResponse.url
   console.log(data);
   res.json(data)
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const data = req.body;
+    const fileStr = req.body.imageUrl;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: "profile_pic",
+      width: "800"
+    });
+    data.imageUrl = uploadedResponse.url;
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while uploading the image" });
+  }
 });
 
 router.put("/", async (req, res) => {

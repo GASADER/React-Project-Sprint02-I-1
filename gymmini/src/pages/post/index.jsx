@@ -47,7 +47,7 @@ export default function PostActivity() {
         values.imageUrl = base64;
       }
       console.log(values);
-      const response = await axios.post("http://127.0.0.1:3001", values);
+      const response = await axios.post("http://127.0.0.1:3001/users", values);
       console.log(response.data);
     } catch (error) {
       console.error(error);
