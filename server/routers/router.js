@@ -1,4 +1,4 @@
-import UserRouter from "./user.router.js"
+import UserRouter from "./post.router.js"
 
 function routers(app) {
   app.get("/", (req, res) => {
