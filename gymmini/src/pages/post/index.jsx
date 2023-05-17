@@ -23,7 +23,7 @@ const postSchema = Yup.object().shape({
 });
 
 
-function readFileAsBase64(file) {
+function readFileAsBase64(file, setImagePreview) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -36,18 +36,18 @@ function readFileAsBase64(file) {
 }
 
 export default function PostActivity() {
-const [imagePreview, setImagePreview] = useState("")
+  const [imagePreview, setImagePreview] = useState("");
 
   const handleSubmit = async (values) => {
     try {
       console.log("asasa");
       const file = values.imageUrl;
       if (file) {
-        const base64 = await readFileAsBase64(file);
+        const base64 = await readFileAsBase64(file, setImagePreview);
         values.imageUrl = base64;
       }
       console.log(values);
-      const response = await axios.get("http://127.0.0.1:3001", values);
+      const response = await axios.post("http://127.0.0.1:3001", values);
       console.log(response.data);
     } catch (error) {
       console.error(error);
