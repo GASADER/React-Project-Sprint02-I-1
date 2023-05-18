@@ -58,7 +58,7 @@ export default function PostActivity() {
       values.username = "aaa";
       values.userImage = "myImg";
       console.log(values);
-      const response = await axios.post("http://127.0.0.1:3001/posts", values);
+      const response = await axios.post("http://127.0.0.1:3001/api/posts", values);
       console.log(response.data);
     } catch (error) {
       console.error(error);
