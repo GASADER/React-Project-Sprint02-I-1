@@ -6,7 +6,10 @@ const Layout = ({ children }) => {
     <div>
       <Navber />
       <main className="mx-auto flex">
-        <Link href="/profile" className="sidebar w-36 lg:w-48">sidebar</Link>
+      <div className="sidebar bg-blue-900 w-36 lg:w-48">
+        <Link href="/profile" >profile</Link>
+        <Link href="/post" >post</Link>
+      </div>
         <section className="">
           {children}
         </section>

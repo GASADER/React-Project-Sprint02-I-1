@@ -8,7 +8,10 @@ const userSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
-    .matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Password cannot contain special characters")
+    .matches(
+      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      "Password cannot contain special characters"
+    )
     .required("Required"),
   firstName: Yup.string()
     .max(50, "Must be 50 characters or less")
@@ -37,7 +40,31 @@ const userSchema = Yup.object().shape({
     .required("Required"),
 });
 
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function register() {
+  const handleSubmit = async (values) => {
+    try {
+      const file = values.profileImage;
+      if (file) {
+        const base64 = await readFileAsBase64(file);
+        values.profileImage = base64;
+      }
+
+      const response = await axios.post("http://127.0.0.1:3001/users", values);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Layout>
@@ -57,11 +84,7 @@ export default function register() {
               profileImage: "",
             }}
             validationSchema={userSchema}
-            onSubmit={(values) = async() => {
-              const response = await axios.get("http://127.0.0.1:3001/users");
-    console.log(response.values);
-    setUsers(response.values);
-            }}
+            onSubmit={handleSubmit}
           >
             {({ errors, touched, setFieldValue }) => (
               <Form className="flex flex-col gap-2">

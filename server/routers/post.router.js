@@ -1,16 +1,19 @@
 import express from "express";
-import { getall } from "../controllers/user.controller.js";
+import { getall } from "../controllers/post.controller.js";
+import {post} from "../controllers/post.controller.js"
 import cloudinary from "../service/cloudniary.js";
+
 
 const router = express.Router();
 
-router.get("/", getall);
-
-router.post("/", (req, res) => {
-  const img = req.body;
-  console.log(img);
-  res.send("post");
+// router.get("/", getall);
+router.get("/", async (req, res) => {
+  const data = req.body;
+  console.log(data);
+  res.json(data)
 });
+
+router.post("/", post)
 
 router.put("/", async (req, res) => {
   try {

@@ -3,6 +3,7 @@ import Layout from "@/components/layout";
 import Mockserver from "@/components/mock";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -13,6 +14,17 @@ const loginSchema = Yup.object().shape({
 });
 
 export default function login() {
+
+  const handleSubmit = async (values) => {
+    try {
+      console.log(values);
+      const response = await axios.get("http://127.0.0.1:3001", values);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Layout>
@@ -23,10 +35,7 @@ export default function login() {
               password: "",
             }}
             validationSchema={loginSchema}
-            onSubmit={(values) => {
-              // same shape as initial values
-              console.log(values);
-            }}
+            onSubmit={handleSubmit}
           >
             {({ errors, touched }) => (
               <Form className="flex flex-col gap-2">
