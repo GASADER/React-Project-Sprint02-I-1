@@ -1,27 +1,35 @@
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
+import Layout from "@/components/layout";
+
 const postSchema = Yup.object().shape({
   imageUrl: Yup.string(),
-  type: Yup.string().oneOf([
-    "Biking",
-    "Walking",
-    "Swimming",
-    "Hiking",
-    "Running",
-  ]).required("Required"),
+  type: Yup.string()
+    .oneOf(["Biking", "Walking", "Swimming", "Hiking", "Running"])
+    .required("Required"),
   distance: Yup.number().max(30, "Over 30 ").required("Required"),
   duration: Yup.object().shape({
     hr: Yup.number().max(24, "Over 24 ").required("Required"),
     min: Yup.number().max(60, "Over 60 ").required("Required"),
   }),
-  title: Yup.string().matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Cannot contain special characters").max(20, "Must be 20 characters or less").required("Required"),
-  description: Yup.string().matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Cannot contain special characters").max(220, "Must be 220 characters or less").required("Required"),
+  title: Yup.string()
+    .matches(
+      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      "Cannot contain special characters"
+    )
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
+  description: Yup.string()
+    .matches(
+      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      "Cannot contain special characters"
+    )
+    .max(220, "Must be 220 characters or less")
+    .required("Required"),
 });
-
 
 function readFileAsBase64(file, setImagePreview) {
   return new Promise((resolve, reject) => {
@@ -46,8 +54,11 @@ export default function PostActivity() {
         const base64 = await readFileAsBase64(file, setImagePreview);
         values.imageUrl = base64;
       }
+      values.userId = "1123455667";
+      values.username = "aaa";
+      values.userImage = "myImg";
       console.log(values);
-      const response = await axios.post("http://127.0.0.1:3001/users", values);
+      const response = await axios.post("http://127.0.0.1:3001/posts", values);
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -119,6 +130,23 @@ export default function PostActivity() {
                     <option value="Swimming">Swimming</option>
                     <option value="Hiking">Hiking</option>
                     <option value="Running">Running</option>
+                  </Field>
+
+                  <div className="container flex gap-4">
+                    <label htmlFor="date" className="text-white">
+                      Date
+                    </label>
+                    {errors.date && touched.date && <div>{errors.date}</div>}
+                  </div>
+                  <Field name="date">
+                    {({ field }) => (
+                      <input
+                        {...field}
+                        type="date"
+                        className="text-black"
+                        onChange={(e) => setFieldValue("date", e.target.value)}
+                      />
+                    )}
                   </Field>
 
                   <div className="container flex gap-4 ">

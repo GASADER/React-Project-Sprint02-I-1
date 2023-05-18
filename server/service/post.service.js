@@ -1,4 +1,5 @@
 import cloudinary from "../service/cloudniary.js";
+import Post from "../models/post.schema.js";
 
 export async function PostActivity(data) {
 
@@ -8,9 +9,12 @@ export async function PostActivity(data) {
           folder: "profile_pic",
           format: "webp"
         });
-        data.imageUrl = uploadedResponse.url;
-        console.log(data);
-        return data
+        const postdata = new Post(data)
+        postdata.imageUrl = uploadedResponse.url;
+        postdata.post_status = true;
+        postdata.timestamps = new Date();
+        console.log(postdata);
+        return postdata.save()
       } catch (error) {
         console.error(error);
       }
