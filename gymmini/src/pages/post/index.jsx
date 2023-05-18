@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -45,8 +46,9 @@ function readFileAsBase64(file, setImagePreview) {
 
 export default function PostActivity() {
   const [imagePreview, setImagePreview] = useState("");
+  const router = useRouter()
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values,{ resetForm }) => {
     try {
       console.log("asasa");
       const file = values.imageUrl;
@@ -60,6 +62,9 @@ export default function PostActivity() {
       console.log(values);
       const response = await axios.post("http://127.0.0.1:3001/api/posts", values);
       console.log(response.data);
+      setImagePreview("")
+      resetForm();
+      router.push("/")
     } catch (error) {
       console.error(error);
     }
