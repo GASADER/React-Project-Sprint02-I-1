@@ -3,6 +3,8 @@ import Layout from "@/components/layout";
 import Mockserver from "@/components/mock";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "@/utils/firebaseConfig.js";
 import axios from "axios";
 
 const loginSchema = Yup.object().shape({
@@ -13,13 +15,15 @@ const loginSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export default function login() {
 
+export default function Login() {
+  const auth = getAuth(app);
   const handleSubmit = async (values) => {
     try {
       console.log(values);
-      const response = await axios.get("http://127.0.0.1:3001", values);
-      console.log(response.data);
+      const { email, password } = values;
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User logged in:", userCredential.user);
     } catch (error) {
       console.error(error);
     }
