@@ -10,8 +10,6 @@ import {
   createUserWithEmailAndPassword,
   browserSessionPersistence,
   getAuth,
-  setPersistence,
-  signInWithEmailAndPassword,
 } from "@firebase/auth";
 
 const loginSchema = Yup.object().shape({
@@ -33,11 +31,22 @@ export default function Register() {
         values.email,
         values.password
       );
+      const user = userCredential.user;
+      sessionStorage.setItem('userId', user.uid);
+      sessionStorage.setItem('email', user.email);
+      sessionStorage.setItem('username', user.displayName);
+      sessionStorage.setItem('userImage', user.photoURL);
+
       console.log("User created:", userCredential.user);
+
       values.userId = userCredential.user.uid
       values.email = userCredential.user.email
-      values.tokens = userCredential.user.getIdToken()
-      const response = await axios.post("http://127.0.0.1:3001/api/user",values);
+      values.username = userCredential.user.displayName
+      values.userImage = userCredential.user.photoURL
+      values.tokens = userCredential.user.accessToken
+      values.password = null
+      console.log(values)
+      const response = await axios.post("http://127.0.0.1:3001/api/users",values);
       router.push("/login")
       console.log(response.data);
     } catch (error) {
