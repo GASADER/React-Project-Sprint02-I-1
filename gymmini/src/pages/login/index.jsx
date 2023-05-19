@@ -1,11 +1,10 @@
 import React from "react";
 import Layout from "@/components/layout";
-import Mockserver from "@/components/mock";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,browserSessionPersistence,setPersistence } from "firebase/auth";
 import { app } from "@/utils/firebaseConfig.js";
-import axios from "axios";
+import { useRouter } from "next/router";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -17,13 +16,20 @@ const loginSchema = Yup.object().shape({
 
 
 export default function Login() {
-  const auth = getAuth(app);
+
+  const router = useRouter();
+  
   const handleSubmit = async (values) => {
+    const auth = getAuth(app);
+    setPersistence(auth, browserSessionPersistence)
     try {
-      console.log(values);
+      console.log(values);  
       const { email, password } = values;
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user
+      sessionStorage.setItem("token", user.accessToken);
       console.log("User logged in:", userCredential.user);
+      router.push("/")
     } catch (error) {
       console.error(error);
     }
