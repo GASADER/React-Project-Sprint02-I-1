@@ -11,6 +11,9 @@ const postSchema = Yup.object().shape({
   type: Yup.string()
     .oneOf(["Biking", "Walking", "Swimming", "Hiking", "Running"])
     .required("Required"),
+  date: Yup.date()
+    .max(new Date(), "Date must not be in the future")
+    .required("Required"),
   distance: Yup.number().max(30, "Over 30 ").required("Required"),
   duration: Yup.object().shape({
     hr: Yup.number().max(24, "Over 24 ").required("Required"),
@@ -18,18 +21,16 @@ const postSchema = Yup.object().shape({
   }),
   title: Yup.string()
     .matches(
-      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
       "Cannot contain special characters"
     )
-    .max(20, "Must be 20 characters or less")
-    .required("Required"),
+    .max(20, "Must be 20 characters or less"),
   description: Yup.string()
     .matches(
-      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
       "Cannot contain special characters"
     )
     .max(220, "Must be 220 characters or less")
-    .required("Required"),
 });
 
 function readFileAsBase64(file, setImagePreview) {
@@ -46,9 +47,9 @@ function readFileAsBase64(file, setImagePreview) {
 
 export default function PostActivity() {
   const [imagePreview, setImagePreview] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleSubmit = async (values,{ resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       console.log("asasa");
       const file = values.imageUrl;
@@ -60,11 +61,14 @@ export default function PostActivity() {
       values.username = "aaa";
       values.userImage = "myImg";
       console.log(values);
-      const response = await axios.post("http://127.0.0.1:3001/api/posts", values);
+      const response = await axios.post(
+        "http://127.0.0.1:3001/api/posts",
+        values
+      );
       console.log(response.data);
-      setImagePreview("")
+      setImagePreview("");
       resetForm();
-      router.push("/")
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -150,6 +154,7 @@ export default function PostActivity() {
                         type="date"
                         className="text-black"
                         onChange={(e) => setFieldValue("date", e.target.value)}
+                        max={new Date().toISOString().split("T")[0]} // Added max prop to restrict future dates
                       />
                     )}
                   </Field>
