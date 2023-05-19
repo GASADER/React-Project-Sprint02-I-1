@@ -27,11 +27,7 @@ export default function Popover ({ prop }){
   const handleEdit = () => {
     try {
     console.log("Edit clicked", prop._id);
-    router.push("/")
-    prop.username = "DBC";
-    const response = axios.put(`http://127.0.0.1:3001/api/posts/${prop._id}`,prop)
-    console.log(response.data);
-    router.push("/")
+    router.push(`/post/edit/${prop._id}`);
     } catch(error){
       console.error("Delete error", error);
     };
