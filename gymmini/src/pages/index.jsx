@@ -3,8 +3,7 @@ import Card from "@/components/card";
 import Mockserver from "@/components/mock";
 import Layout from "@/components/layout";
 import Upload from "@/components/mockphoto";
-import axios from "axios";
-
+import { axiosInstance } from "../utils/axiosInstance.js";
 export default function Home() {
   const [prop, setProp] = useState([]);
 
@@ -14,7 +13,7 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:3001/api/posts"); 
+      const response = await axiosInstance.get("/api/posts"); 
       console.log(response)
       setProp(response.data);
     } catch (error) {
