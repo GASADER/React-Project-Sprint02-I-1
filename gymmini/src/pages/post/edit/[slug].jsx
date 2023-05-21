@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -45,14 +45,17 @@ function readFileAsBase64(file, setImagePreview) {
   });
 }
 
-export default function PostActivity() {
+export default function EditPostActivity() {
   const [imagePreview, setImagePreview] = useState("");
   const router = useRouter();
+  const { prop } = router.query;
+
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      console.log("asasa");
+      const { slug } = router.query;
       const file = values.imageUrl;
+
       if (file) {
         const base64 = await readFileAsBase64(file, setImagePreview);
         values.imageUrl = base64;
@@ -60,9 +63,8 @@ export default function PostActivity() {
       values.userId = "1123455667";
       values.username = "aaa";
       values.userImage = "myImg";
-      console.log(values);
-      const response = await axios.post(
-        "http://127.0.0.1:3001/api/posts",
+      const response = await axios.put(
+        `http://127.0.0.1:3001/api/posts/${slug}`,
         values
       );
       console.log(response.data);

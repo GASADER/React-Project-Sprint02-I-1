@@ -5,12 +5,17 @@
 @import '../styles/varidation.css';
 @import './card.css';
 @import './popover-card.css';
+@import './profile.css';
 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   background-color: #1F2021;
+}
+
+::-webkit-scrollbar{
+  width: 0px;
 }
 
 @media (prefers-color-scheme: dark) {

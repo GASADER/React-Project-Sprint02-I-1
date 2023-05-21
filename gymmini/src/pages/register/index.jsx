@@ -1,102 +1,94 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "@/components/layout";
+import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import { app } from "@/utils/firebaseConfig.js";
+import { firebase } from "@/utils/firebaseConfig.js";
+import {
+  createUserWithEmailAndPassword,
+  browserSessionPersistence,
+  getAuth,
+} from "@firebase/auth";
 
-const userSchema = Yup.object().shape({
+const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
+    .matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Password cannot contain special characters")
     .required("Required"),
-  firstName: Yup.string()
-    .max(50, "Must be 50 characters or less")
-    .required("Required"),
-  lastName: Yup.string()
-    .max(50, "Must be 50 characters or less")
-    .required("Required"),
-  birthDate: Yup.string().required("Required"),
-  gender: Yup.string()
-    .oneOf(["male", "female", "other"])
-    .required("Required"),
-  city: Yup.string().required("Required"),
-  height: Yup.number().required("Required"),
-  weight: Yup.number().required("Required"),
-  profileName: Yup.string().required("Required"),
-  profileImage: Yup.string().required("Required"),
 });
 
-export default function register() {
+export default function Register() {
+  const router = useRouter();
+  const handleSubmit = async (values) => {
+    try {
+      console.log(values);
+      const auth = getAuth(app);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      const user = userCredential.user;
+      sessionStorage.setItem('userId', user.uid);
+      sessionStorage.setItem('email', user.email);
+      sessionStorage.setItem('username', user.displayName);
+      sessionStorage.setItem('userImage', user.photoURL);
+
+      console.log("User created:", userCredential.user);
+
+      values.userId = userCredential.user.uid
+      values.email = userCredential.user.email
+      values.username = userCredential.user.displayName
+      values.userImage = userCredential.user.photoURL
+      values.tokens = userCredential.user.accessToken
+      values.password = null
+      console.log(values)
+      const response = await axios.post("http://127.0.0.1:3001/api/users",values);
+      router.push("/login")
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Layout>
-        <div className=" flex flex-col">
+        <div className=" flex flex-col items-center justify-center my-40">
           <Formik
             initialValues={{
-              firstName: "",
-              lastName: "",
               email: "",
               password: "",
-              birthDate: "",
-              gender: "",
-              city: "",
-              height: "",
-              weight: "",
-              profileName: "",
-              profileImage: "",
             }}
-            validationSchema={userSchema}
-            onSubmit={(values) => {
-              // same shape as initial values
-              console.log(values);
-            }}
+            validationSchema={loginSchema}
+            onSubmit={handleSubmit}
           >
             {({ errors, touched }) => (
-              <Form>
-                <Field name="firstName" />
-                {errors.firstName && touched.firstName ? (
-                  <div>{errors.firstName}</div>
-                ) : null}
-                <Field name="lastName" />
-                {errors.lastName && touched.lastName ? (
-                  <div>{errors.lastName}</div>
-                ) : null}
+              <Form className="flex flex-col gap-2">
+                <label htmlFor="email" className="text-white">
+                  Email
+                </label>
                 <Field name="email" type="email" />
                 {errors.email && touched.email ? (
                   <div>{errors.email}</div>
                 ) : null}
+
+                <label htmlFor="password" className="text-white">
+                  Password
+                </label>
                 <Field name="password" type="password" />
                 {errors.password && touched.password ? (
                   <div>{errors.password}</div>
                 ) : null}
-                <Field name="birthDate" />
-                {errors.birthDate && touched.birthDate ? (
-                  <div>{errors.birthDate}</div>
-                ) : null}
-                <Field name="gender" as="select">
-                  <option value="">Select a gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </Field>
-                {errors.gender && touched.gender ? (
-                  <div>{errors.gender}</div>
-                ) : null}
-                <Field name="city" />
-                {errors.city && touched.city ? (
-                  <div>{errors.city}</div>
-                ) : null}
-                <Field name="height" type="number" />
-                {errors.height && touched.height ? (
-                  <div>{errors.height}</div>
-                ) : null}
-                <Field name="weight" type="number" />
-                {errors.weight && touched.weight ? (
-                  <div>{errors.weight}</div>
-                ) : null}
+                <button type="submit">Submit</button>
               </Form>
             )}
-            </Formik>
-            </div>
-            </Layout>
-            </>
-  )}
+          </Formik>
+        </div>
+      </Layout>
+    </>
+  );
+}

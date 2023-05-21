@@ -5,7 +5,7 @@ function Mockserver() {
   const [post, setPost] = useState([]);
 
   const getPost = async () => {
-    const res = await axios.get("http://127.0.0.1:3001");
+    const res = await axios.get("http://127.0.0.1:3001/user");
     console.log(res.data);
     setPost(res.data);
   };
