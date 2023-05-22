@@ -1,9 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-
+import { axiosInstance } from '../../../utils/axiosInstance.js'
 import Layout from "@/components/layout";
 
 const postSchema = Yup.object().shape({
@@ -30,7 +29,7 @@ const postSchema = Yup.object().shape({
       /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
       "Cannot contain special characters"
     )
-    .max(220, "Must be 220 characters or less")
+    .max(220, "Must be 220 characters or less"),
 });
 
 function readFileAsBase64(file, setImagePreview) {
@@ -48,8 +47,9 @@ function readFileAsBase64(file, setImagePreview) {
 export default function EditPostActivity() {
   const [imagePreview, setImagePreview] = useState("");
   const router = useRouter();
-  const { prop } = router.query;
-
+  const userId = localStorage.getItem("userId")
+  const username = localStorage.getItem("username")
+  const userImage = localStorage.getItem("userImage")
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -60,17 +60,20 @@ export default function EditPostActivity() {
         const base64 = await readFileAsBase64(file, setImagePreview);
         values.imageUrl = base64;
       }
-      values.userId = "1123455667";
-      values.username = "aaa";
-      values.userImage = "myImg";
-      const response = await axios.put(
-        `http://127.0.0.1:3001/api/posts/${slug}`,
-        values
-      );
-      console.log(response.data);
-      setImagePreview("");
-      resetForm();
-      router.push("/");
+      values.userId = userId;
+      values.username = username;
+      values.userImage = userImage;
+      axiosInstance
+        .put(`api/posts/${slug}`, values)
+        .then(async (response) => {
+          console.log(response.data);
+          setImagePreview("");
+          resetForm();
+          router.push("/");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } catch (error) {
       console.error(error);
     }
