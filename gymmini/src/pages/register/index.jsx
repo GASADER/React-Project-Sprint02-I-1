@@ -65,14 +65,16 @@ export default function register() {
           >
             {({ errors, touched, setFieldValue }) => (
               <Form className="flex flex-col gap-2">
-                <div className="container flex gap-4 ">
-                <label htmlFor="firstName" className="text-white ">
+                <div className="container flex gap-4">
+                <label htmlFor="firstName" className="text-white" >
                   First Name
                 </label>{errors.firstName && touched.firstName ? (
                   <div className=" text-red-500">{errors.firstName}</div>
                 ) : null}
                 </div>
                 <Field name="firstName" /> 
+
+
                 
                 <div className="container flex gap-4 ">
                 <label htmlFor="lastName" className="text-white">
@@ -189,7 +191,7 @@ export default function register() {
                 </div>
                     
                 
-                <button type="submit">Submit</button>
+                <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Submit</button>
               </Form>
             )}
           </Formik>
