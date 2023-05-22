@@ -25,8 +25,6 @@ export default function Home() {
       <Layout> 
             <Card prop={prop}></Card>
       </Layout>
-      <Mockserver />
-      <Upload/>
     </>
   );
 }

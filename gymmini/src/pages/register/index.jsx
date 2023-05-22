@@ -3,14 +3,14 @@ import Layout from "@/components/layout";
 import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import { useSnackbar } from "notistack";
 import { app } from "@/utils/firebaseConfig.js";
-import { firebase } from "@/utils/firebaseConfig.js";
 import {
   createUserWithEmailAndPassword,
-  browserSessionPersistence,
   getAuth,
 } from "@firebase/auth";
+import { axiosInstance } from '../../utils/axiosInstance.js'
+
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -21,10 +21,13 @@ const loginSchema = Yup.object().shape({
 });
 
 export default function Register() {
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+
   const handleSubmit = async (values) => {
     try {
       console.log(values);
+
       const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -32,27 +35,35 @@ export default function Register() {
         values.password
       );
       const user = userCredential.user;
-      sessionStorage.setItem('userId', user.uid);
-      sessionStorage.setItem('email', user.email);
-      sessionStorage.setItem('username', user.displayName);
-      sessionStorage.setItem('userImage', user.photoURL);
+      localStorage.setItem('userId', user.uid);
+      localStorage.setItem('token', user.accessToken);
 
       console.log("User created:", userCredential.user);
-
-      values.userId = userCredential.user.uid
-      values.email = userCredential.user.email
-      values.username = userCredential.user.displayName
-      values.userImage = userCredential.user.photoURL
-      values.tokens = userCredential.user.accessToken
-      values.password = null
-      console.log(values)
-      const response = await axios.post("http://127.0.0.1:3001/api/users",values);
-      router.push("/login")
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      
+      const userInfo = {
+        userId: user.uid,
+        email: values.email,
+        username: user.uid,
+      };
+      console.log(userInfo)
+      
+      axiosInstance
+      .post("api/users", userInfo)
+      .then(async (response) => {
+        console.log("response: ", response);
+        enqueueSnackbar("Register success.", { variant: "success" });
+        router.push("/login")
+      }).catch((error) => {
+          console.log("error: " + error.message);
+          enqueueSnackbar(`Register failed: $`);
+        })} catch (error) {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(true);
+          console.log(errorCode, errorMessage);
+          enqueueSnackbar(`Register failed: ${errorMessage}`, { variant: "error" });
+        }
+     }
 
   return (
     <>
