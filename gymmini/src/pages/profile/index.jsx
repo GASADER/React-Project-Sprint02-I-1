@@ -3,7 +3,7 @@ import Layout from "@/components/layout";
 import { mockdata } from "@/data/mockdata";
 import Card from "@/components/card";
 
-export default function login() {
+export default function profile() {
   const item = mockdata.find((item) => item.id === 3);
   const card = mockdata.filter((item) => item.id === 3);
 
