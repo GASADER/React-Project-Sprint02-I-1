@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout";
 import { mockdata } from "@/data/mockdata";
 import Card from "@/components/card";
 
-export default function login() {
+export default function profile() {
+  
+  const[Id,setId] = useState('')
+  
+  useEffect(()=>{
+    const userId = localStorage.getItem("userId");
+    setId(userId)
+    try {
+      const response = axiosInstance.get(`/api/posts/${Id}`)
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  })
+  
   const item = mockdata.find((item) => item.id === 3);
   const card = mockdata.filter((item) => item.id === 3);
 

@@ -20,14 +20,19 @@ export default function Login() {
   const router = useRouter();
   
   const handleSubmit = async (values) => {
+
     const auth = getAuth(app);
     setPersistence(auth, browserSessionPersistence)
     try {
       console.log(values);  
       const { email, password } = values;
+
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user
-      sessionStorage.setItem("token", user.accessToken);
+      localStorage.setItem("token", user.accessToken);
+      localStorage.setItem("userId", user.uid);
+      localStorage.setItem("username", user.username);
+      localStorage.setItem("userImage", user.userImage);
       console.log("User logged in:", userCredential.user);
       router.push("/")
     } catch (error) {
