@@ -46,7 +46,9 @@ function readFileAsBase64(file, setImagePreview) {
 }
 
 export default function PostActivity() {
+  
   const [imagePreview, setImagePreview] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -54,6 +56,7 @@ export default function PostActivity() {
     const username = localStorage.getItem('username')
     const userImage = localStorage.getItem('userImage')
     try {
+      setLoading(true);
       const file = values.imageUrl;
       if (file) {
         const base64 = await readFileAsBase64(file, setImagePreview);
@@ -67,7 +70,7 @@ export default function PostActivity() {
       console.log(response.data);
       setImagePreview("");
       resetForm();
-      router.push("/");
+      router.back();
     } catch (error) {
       console.error(error);
     }
@@ -215,6 +218,7 @@ export default function PostActivity() {
                   </div>
                   <Field name="description" type="description" />
                   <button type="submit">Submit</button>
+                  {loading && <div>Loading...</div>}
                 </div>
               </Form>
             )}

@@ -24,7 +24,6 @@ export default function Card({ prop }) {
       console.log("Edit clicked", item._id);
       router.push({
         pathname: `/post/edit/${item._id}`,
-        query: { item: item },
       });
     } catch (error) {
       console.error("Edit error:", error);
@@ -38,6 +37,7 @@ export default function Card({ prop }) {
       console.log(item._id);
       const response = await axiosInstance.delete(`/api/posts/${item._id}`)
       console.log(response)
+      window.location.reload();
     } catch (error) {
       console.error("Delete error:", error);
     }
