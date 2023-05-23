@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -9,7 +9,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Popover from "./popover-card";
 
+
 export default function Card({ prop }) {
+  const id = typeof window !== "undefined" ? localStorage.getItem("userId"): null;
   return (
     <div className="cardContainer lg:columns-3 md:columns-2 py-4 px-2">
       {prop.map((item, index) => {
@@ -32,7 +34,7 @@ export default function Card({ prop }) {
                 </div>
                 <p className="profile-name font-bold px-2">{item.username}</p>
               </div>
-              <Popover prop={item} />
+              {item.userId === id && <Popover prop={item} />}
             </div>
             <div className="cardSection  w-full h-auto relative">
               {item.imageUrl ? (
