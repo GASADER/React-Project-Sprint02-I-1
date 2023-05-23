@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { axiosInstance } from "../utils/axiosInstance.js";
 import {
   faHeart,
   faClock,
@@ -8,10 +9,40 @@ import {
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import Popover from "./popover-card";
+import { useRouter } from "next/router";
 
 
 export default function Card({ prop }) {
   const id = typeof window !== "undefined" ? localStorage.getItem("userId"): null;
+  const token = typeof window !== "undefined" ? localStorage.getItem("token"): null;
+  console.log(token)
+  const router = useRouter();
+
+  const handleEdit = (item) => {
+    try {
+      console.log("Edit");
+      console.log("Edit clicked", item._id);
+      router.push({
+        pathname: `/post/edit/${item._id}`,
+        query: { item: item },
+      });
+    } catch (error) {
+      console.error("Edit error:", error);
+    }
+  };
+
+  const handleDelete = async(item) => {
+    try {
+      console.log("Delete");
+      console.log(item);
+      console.log(item._id);
+      const response = await axiosInstance.delete(`/api/posts/${item._id}`)
+      console.log(response)
+    } catch (error) {
+      console.error("Delete error:", error);
+    }
+  };
+
   return (
     <div className="cardContainer lg:columns-3 md:columns-2 py-4 px-2">
       {prop.map((item, index) => {
@@ -34,7 +65,7 @@ export default function Card({ prop }) {
                 </div>
                 <p className="profile-name font-bold px-2">{item.username}</p>
               </div>
-              {item.userId === id && <Popover prop={item} />}
+              {item.userId === id&& token && <Popover prop={item} onEdit={() => handleEdit(item)} onDelete={() => handleDelete(item)} />}
             </div>
             <div className="cardSection  w-full h-auto relative">
               {item.imageUrl ? (

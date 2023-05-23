@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 
 
-export default function Popover ({ prop }){
+export default function Popover ({ onEdit, onDelete }){
   const [popoverShow, setPopoverShow] = React.useState(false);
   const router = useRouter();
   const btnRef = React.createRef();
@@ -24,25 +24,6 @@ export default function Popover ({ prop }){
     setPopoverShow(false);
   };
 
-  const handleEdit = () => {
-    try {
-    console.log("Edit clicked", prop._id);
-    router.push(`/post/edit/${prop._id}`);
-    } catch(error){
-      console.error("Delete error", error);
-    };
-  };
-
-  const handleDelete = () => {
-    try {
-      console.log("Delete clicked", prop._id);
-      router.push("/")
-      const response = axios.delete(`http://127.0.0.1:3001/api/posts/${prop._id}`)
-      console.log(response.data);
-      } catch(error){
-        console.error("Delete error", error);
-      };
-  };
 
   return (
     <>
@@ -65,10 +46,10 @@ export default function Popover ({ prop }){
             ref={popoverRef}
           >
             <div  className="flex flex-col absolute right-0 bg-popover z-50 font-normal leading-normal text-sm max-w-xs text-right no-underline break-words rounded-l-lg border-black border">
-              <button onClick={handleEdit} className="hover:text-yellow-500 active:bg-yellow-500 rounded-tl-lg px-4 py-2 ">
+              <button onClick={onEdit} className="hover:text-yellow-500 active:bg-yellow-500 rounded-tl-lg px-4 py-2 ">
                 Edit
               </button>
-              <button onClick={handleDelete} className="hover:text-red-500 active:bg-red-500 rounded-bl-lg px-4 py-2 ">
+              <button onClick={onDelete} className="hover:text-red-500 active:bg-red-500 rounded-bl-lg px-4 py-2 ">
                 Delete
               </button>
             </div>
