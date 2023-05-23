@@ -50,15 +50,18 @@ export default function PostActivity() {
   const router = useRouter();
 
   const handleSubmit = async (values, { resetForm }) => {
+    const userId = localStorage.getItem('userId')
+    const username = localStorage.getItem('username')
+    const userImage = localStorage.getItem('userImage')
     try {
       const file = values.imageUrl;
       if (file) {
         const base64 = await readFileAsBase64(file, setImagePreview);
         values.imageUrl = base64;
       }
-      values.userId = "1123455667";
-      values.username = "aaa";
-      values.userImage = "myImg";
+      values.userId = userId;
+      values.username = username;
+      values.userImage = userImage;
       console.log(values);
       const response = await axiosInstance.post("/api/posts",values)
       console.log(response.data);
