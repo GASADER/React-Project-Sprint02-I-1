@@ -2,7 +2,7 @@ import axios from "axios";
 
 //สร้างinstance ของ axios
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:3002",
+  baseURL: process.env.NEXT_PUBLIC_SERVER,
   //กำหนดชื่อheadersและค่าเป็นfoobar
   headers: { "X-Custom-Header": "foobar" },
 });
