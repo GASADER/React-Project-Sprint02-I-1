@@ -13,9 +13,9 @@ import { useRouter } from "next/router";
 
 
 export default function Card({ prop }) {
+  console.log(prop)
   const id = typeof window !== "undefined" ? localStorage.getItem("userId"): null;
   const token = typeof window !== "undefined" ? localStorage.getItem("token"): null;
-  console.log(token)
   const router = useRouter();
 
   const handleEdit = (item) => {
