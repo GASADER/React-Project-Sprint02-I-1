@@ -45,11 +45,14 @@ function readFileAsBase64(file, setImagePreview) {
 }
 
 export default function EditPostActivity() {
+  const [editData,setEditdata] = useState()
   const [imagePreview, setImagePreview] = useState("");
   const router = useRouter();
-  const userId = localStorage.getItem("userId")
-  const username = localStorage.getItem("username")
-  const userImage = localStorage.getItem("userImage")
+  if(typeof window !== "undefined"){
+    const userId = localStorage.getItem("userId")
+    const username = localStorage.getItem("username")
+    const userImage = localStorage.getItem("userImage")
+  }
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
