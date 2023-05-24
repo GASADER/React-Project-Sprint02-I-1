@@ -10,9 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Popover from "./popover-card";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 
 export default function Card({ prop }) {
+  const { enqueueSnackbar } = useSnackbar();
   console.log(prop)
   const id = typeof window !== "undefined" ? localStorage.getItem("userId"): null;
   const token = typeof window !== "undefined" ? localStorage.getItem("token"): null;
@@ -27,6 +29,8 @@ export default function Card({ prop }) {
       });
     } catch (error) {
       console.error("Edit error:", error);
+      const errorMessage = error.message;
+      enqueueSnackbar(`Edit Post failed: ${errorMessage}`, { variant: "error" })
     }
   };
 
@@ -37,9 +41,12 @@ export default function Card({ prop }) {
       console.log(item._id);
       const response = await axiosInstance.delete(`/api/posts/${item._id}`)
       console.log(response)
+      enqueueSnackbar("Delete Post success.", { variant: "success" });
       window.location.reload();
     } catch (error) {
+      const errorMessage = error.message;
       console.error("Delete error:", error);
+      enqueueSnackbar(`Delete Post failed: ${errorMessage}`, { variant: "error" });
     }
   };
 
@@ -74,7 +81,7 @@ export default function Card({ prop }) {
                   <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 items-start text-white p-2 ">
                     <div className="card-section-distance ">
                       <FontAwesomeIcon icon={faRoad} className="px-2" />
-                      {item.distance} km
+                      {item.distance} m.
                     </div>
                     <div className="flex gap-2">
                       <div className="card-section-duration ">
