@@ -4,16 +4,31 @@ import img from "../../../public/user.png";
 import Card from "@/components/card";
 import Image from "next/image";
 import { axiosInstance } from "@/utils/axiosInstance";
+import { useRouter } from "next/router";
+import Loading from "@/components/Loading"
 
 export default function profile() {
   const [Id, setId] = useState("");
-  const [userId, setUserId] = useState("");
   const [username, setUsername] = useState("");
   const [userImage, setUserimage] = useState("");
   const [responseData, setResponseData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const settingProfile = () => {
+    router.push(`/profile/edit/`);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
+
+        if (typeof window !== "undefined") {
+          const token = localStorage.getItem("token");
+          if (!token) {
+            router.push("/"); 
+            return;
+          }
+        }
 
       const userId = localStorage.getItem("userId");
       setId(userId);
@@ -21,11 +36,14 @@ export default function profile() {
       setUsername(storedUsername);
 
       try {
+        setIsLoading(true)
         const response = await axiosInstance.get(`/api/users/${userId}/posts`);
         console.log(response.data);
         setResponseData(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
 
@@ -40,7 +58,7 @@ export default function profile() {
   }, []);
 
   const item = {
-    id: userId,
+    id: Id,
     username: username,
     userImage: userImage,
   };
@@ -50,6 +68,9 @@ export default function profile() {
   
   return (
     <>
+    {isLoading ? (
+          <Loading /> 
+        ) : (
       <Layout>
         <div className="profileContainer">
           <div className="profileHeadContainer text-white" key={item.id}>
@@ -79,7 +100,7 @@ export default function profile() {
                 </div>
               </div>
               <div className="profilesetting grow debug flex items-center align-middle">
-                <button className="setting bg-red-500 rounded-2xl py-2 px-4 w-full">
+                <button className="setting bg-red-500 rounded-2xl py-2 px-4 w-full" onClick={settingProfile}>
                   {" "}
                   Setting
                 </button>
@@ -91,6 +112,7 @@ export default function profile() {
           </div>
         </div>
       </Layout>
+        )}
     </>
   );
 }

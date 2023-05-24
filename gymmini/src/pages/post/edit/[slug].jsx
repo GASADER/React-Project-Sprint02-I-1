@@ -34,6 +34,7 @@ const postSchema = Yup.object().shape({
 
 
 
+
 function readFileAsBase64(file, setImagePreview) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -49,7 +50,16 @@ function readFileAsBase64(file, setImagePreview) {
 export default function EditPostActivity() {
   const [imagePreview, setImagePreview] = useState("");
   const router = useRouter();
-  const { id } = router.query;
+
+  useEffect(()=>{
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/"); 
+        return;
+      }
+    }
+  })
   
   const handleSubmit = async (values, { resetForm }) => {
     try {
