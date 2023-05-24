@@ -21,7 +21,7 @@ export default function profile() {
       setUsername(storedUsername);
 
       try {
-        const response = await axiosInstance.get(`/api/posts/${userId}`);
+        const response = await axiosInstance.get(`/api/users/${userId}/posts`);
         console.log(response.data);
         setResponseData(response.data);
       } catch (error) {
