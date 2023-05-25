@@ -14,14 +14,14 @@ const Layout = ({ children }) => {
     <div>
       <Navber />
       <main className="sidebarcontainer mx-auto flex">
-        <div className="sidebar w-36 lg:w-48 flex flex-col px-8 py-4 gap-4">
+        <div className="sidebar w-36 lg:w-48 flex flex-col px-8 py-4 gap-4 text-2xl">
+          <Link href="/post">Post</Link>
+          <div className=" border border-white w-full"></div>
           <a onClick={() => handleLinkClick("Biking")}>Biking</a>
           <a onClick={() => handleLinkClick("Walking")}>Walking</a>
           <a onClick={() => handleLinkClick("Swimming")}>Swimming</a>
           <a onClick={() => handleLinkClick("Hiking")}>Hiking</a>
           <a onClick={() => handleLinkClick("Running")}>Running</a>
-          <div className=" border border-black w-full"></div>
-          <Link href="/post">Post</Link>
         </div>
         <section className="">{children}</section>
       </main>
