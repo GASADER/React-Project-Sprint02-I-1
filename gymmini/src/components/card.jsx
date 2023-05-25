@@ -21,6 +21,12 @@ export default function Card({ prop }) {
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const router = useRouter();
 
+  
+  const handleLinkClick = (slug) => {
+    router.push(`/post/type/${slug}`); 
+  };
+
+
   const handleEdit = (item) => {
     console.log(item);
     try {
@@ -78,7 +84,9 @@ export default function Card({ prop }) {
                     className="card-profile-img aspect-square rounded-full"
                   />
                 </div>
-                <p className="profile-name font-bold px-2 text-ellipsis overflow-hidden">{item.username}</p>
+                <p className="profile-name font-bold px-2 text-ellipsis overflow-hidden">
+                  {item.username}
+                </p>
               </div>
               {item.userId === id && token && (
                 <Popover
@@ -106,7 +114,7 @@ export default function Card({ prop }) {
                         {item.duration.min} min
                       </div>
                     </div>
-                    <button className="card-section-tag px-2 rounded-3xl border border-black text-white bg-purple-500">
+                    <button className="card-section-tag px-2 rounded-3xl border border-black text-white bg-purple-500" onClick={() => handleLinkClick(item.type)}>
                       {item.type}
                     </button>
                   </div>
@@ -126,7 +134,7 @@ export default function Card({ prop }) {
                       {item.duration.min} min
                     </div>
                   </div>
-                  <button className="card-section-tag px-2 rounded-3xl border border-black text-white bg-purple-500">
+                  <button className="card-section-tag px-2 rounded-3xl border border-black text-white bg-purple-500" onClick={() => handleLinkClick(item.type)}>
                     {item.type}
                   </button>
                 </div>
@@ -143,7 +151,7 @@ export default function Card({ prop }) {
             </div>
             <div className="cardFooter w-full h-auto p-2 ">
               <div className="cardFooter-container flex justify-between p-2">
-                <div className="like-comment flex gap-4 ">
+                <div className="like-comment flex gap-4 "> 
                   <button>
                     <div className="card-like">
                       <FontAwesomeIcon
