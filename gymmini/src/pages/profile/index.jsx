@@ -5,7 +5,7 @@ import Card from "@/components/card";
 import Image from "next/image";
 import { axiosInstance } from "@/utils/axiosInstance";
 import { useRouter } from "next/router";
-import Loading from "@/components/Loading"
+import Loading from "../../components/loading.jsx"
 
 export default function profile() {
   const [Id, setId] = useState("");
