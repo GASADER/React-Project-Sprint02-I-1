@@ -23,6 +23,7 @@ const Layout = ({ children }) => {
           <a onClick={() => handleLinkClick("Hiking")}>Hiking</a>
           <a onClick={() => handleLinkClick("Running")}>Running</a>
         </div>
+        <div className="h-screen border border-black "></div>
         <section className="">{children}</section>
       </main>
     </div>

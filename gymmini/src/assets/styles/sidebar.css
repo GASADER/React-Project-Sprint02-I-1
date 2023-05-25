@@ -3,7 +3,7 @@
 }
 .sidebar
 {
-    background-color: #131414;
+    /* background-color: #131414; */
     color: aliceblue;
     flex-grow: 1;
 }
