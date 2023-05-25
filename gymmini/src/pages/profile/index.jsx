@@ -72,7 +72,7 @@ export default function profile() {
           <Loading /> 
         ) : (
       <Layout>
-        <div className="profileContainer">
+        <div className="profileContainer ">
           <div className="profileHeadContainer text-white" key={item.id}>
             <div className="profileHead border rounded-lg flex m-8">
               <div className="profileimg grow flex flex-col items-center py-4">

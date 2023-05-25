@@ -42,7 +42,7 @@ export default function EditProfile() {
     const file = event.target.files[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));
-      register("userImage").onChange(event); // Manually trigger onChange for registered field
+      register("userImage").onChange(event);
     }
   };
 

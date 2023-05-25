@@ -96,7 +96,10 @@ export default function PostActivity() {
   return (
     <>
       <Layout>
-        <div className=" flex flex-col items-center">
+      <div className=" bg-white mx-80 rounded-3xl p-4">
+
+        <div className=" flex flex-col items-center bg-purple-800 rounded-3xl p-4">
+          <div className="py-4 text-white text-3xl">Post your activity</div>
           <Formik
             initialValues={{
               imageUrl: "",
@@ -234,13 +237,14 @@ export default function PostActivity() {
                     ) : null}
                   </div>
                   <Field name="description" type="description" />
-                  <button type="submit">Submit</button>
-                  {loading && <div>Loading...</div>}
+                  <button type="submit" className=" rounded-3xl bg-cyan-500">Submit</button>
+                  {loading && <div className=" bg-slate-500">Loading...</div>}
                 </div>
               </Form>
             )}
           </Formik>
         </div>
+      </div>
       </Layout>
     </>
   );

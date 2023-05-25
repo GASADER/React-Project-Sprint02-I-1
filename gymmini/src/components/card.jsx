@@ -21,12 +21,12 @@ export default function Card({ prop }) {
   const router = useRouter();
 
   const handleEdit = (item) => {
+    console.log(item)
     try {
-      console.log("Edit");
-      console.log("Edit clicked", item._id);
       router.push({
-        pathname: `/post/edit/${item._id}`,
-      });
+        pathname: `/post/edit/`,
+        query: { item: JSON.stringify(item) }
+      },item);
     } catch (error) {
       console.error("Edit error:", error);
       const errorMessage = error.message;
