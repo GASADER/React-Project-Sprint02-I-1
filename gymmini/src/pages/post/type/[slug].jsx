@@ -8,15 +8,15 @@ import { useRouter } from "next/router";
 
 export default function FindType() {
   const [prop, setProp] = useState([]);
-  const router = useRouter(); // เพิ่มการใช้งาน useRouter()
+  const router = useRouter();
+  const { slug } = router.query; 
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [slug]);
 
   const fetchData = async () => {
     try {
-      const { slug } = router.query; 
       console.log(slug)
       const response = await axiosInstance.get(`/api/posts/?activity=${slug}`);
       console.log(response);
