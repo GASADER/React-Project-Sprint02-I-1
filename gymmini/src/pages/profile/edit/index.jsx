@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const userSchema = Yup.object().shape({
-  userId: Yup.string().required("User ID is required"),
+  username: Yup.string(),
+  userImage: Yup.string(),
   email: Yup.string().email("Invalid email address"),
   firstName: Yup.string().max(50, "Must be 50 characters or less"),
   lastName: Yup.string().max(50, "Must be 50 characters or less"),
@@ -18,7 +19,6 @@ const userSchema = Yup.object().shape({
   city: Yup.string(),
   height: Yup.number().max(300, "Over 300"),
   weight: Yup.number().max(300, "Over 300"),
-  username: Yup.string(),
 });
 
 export default function EditProfile() {
@@ -36,7 +36,7 @@ export default function EditProfile() {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
       if (!token) {
-        router.push("/");
+        router.push("/profile");
         return;
       }
     }
@@ -59,9 +59,11 @@ export default function EditProfile() {
         const userId = localStorage.getItem("userId");
         values.userId = userId;
       }
+
       localStorage.setItem("userId", values.userId);
       localStorage.setItem("username", values.username);
       localStorage.setItem("userImage", values.userImage);
+
       axiosInstance
         .put(`api/users/${values.userId}`, values)
         .then(async (response) => {
@@ -88,15 +90,21 @@ export default function EditProfile() {
                 className="flex flex-col gap-2"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                {/* <div>
-            <input
-              type="file"
-              className="text-white"
-              onChange={handleImageChange}
-            />
-            {imagePreview && <img src={imagePreview} alt="Image Preview" width="200" />}
-            {errors.userImage && <div className="text-red-500">{errors.userImage.message}</div>}
-          </div> */}
+                <div>
+                  <input
+                    type="file"
+                    className="text-white"
+                    onChange={handleImageChange}
+                  />
+                  {imagePreview && (
+                    <img src={imagePreview} alt="Image Preview" width="200" />
+                  )}
+                  {errors.userImage && (
+                    <div className="text-red-500">
+                      {errors.userImage.message}
+                    </div>
+                  )}
+                </div>
                 <label htmlFor="username" className="text-white">
                   Username
                 </label>
@@ -186,7 +194,11 @@ export default function EditProfile() {
                   <div className="text-red-500">{errors.weight.message}</div>
                 )}
 
-                <button type="submit" className=" rounded-3xl bg-cyan-500">
+                <button
+                  type="submit"
+                  className="rounded-3xl bg-cyan-500"
+                  onClick={handleSubmit(onSubmit)}
+                >
                   Submit
                 </button>
               </form>
