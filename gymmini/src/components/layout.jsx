@@ -16,11 +16,11 @@ const Layout = ({ children }) => {
         <div className="sidebar bg-blue-900 w-36 lg:w-48 flex flex-col px-8 py-4 gap-4">
           <Link href="/profile">Profile</Link>
           <Link href="/post">Post</Link>
-          <a onClick={() => handleLinkClick("biking")}>Biking</a>
-          <a onClick={() => handleLinkClick("walking")}>Walking</a>
-          <a onClick={() => handleLinkClick("swimming")}>Swimming</a>
-          <a onClick={() => handleLinkClick("hiking")}>Hiking</a>
-          <a onClick={() => handleLinkClick("running")}>Running</a>
+          <a onClick={() => handleLinkClick("Biking")}>Biking</a>
+          <a onClick={() => handleLinkClick("Walking")}>Walking</a>
+          <a onClick={() => handleLinkClick("Swimming")}>Swimming</a>
+          <a onClick={() => handleLinkClick("Hiking")}>Hiking</a>
+          <a onClick={() => handleLinkClick("Running")}>Running</a>
         </div>
         <section className="">{children}</section>
       </main>

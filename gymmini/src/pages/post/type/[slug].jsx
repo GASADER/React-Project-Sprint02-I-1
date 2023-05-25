@@ -4,7 +4,7 @@ import Mockserver from "@/components/mock";
 import Layout from "@/components/layout";
 import Upload from "@/components/mockphoto";
 import { axiosInstance } from "../../../utils/axiosInstance.js";
-import { useRouter } from "next/router"; // เพิ่ม import นี้
+import { useRouter } from "next/router";
 
 export default function FindType() {
   const [prop, setProp] = useState([]);
@@ -16,9 +16,8 @@ export default function FindType() {
 
   const fetchData = async () => {
     try {
-      const { slug } = router.query; // ดึงค่า slug จาก router
-      const response = await axiosInstance.get(`/api/posts/?type=${slug}`); // เพิ่ม query parameter ให้กับ URL
-      console.log(slug);
+      const { slug } = router.query; 
+      const response = await axiosInstance.get(`/api/posts/posts?activity=${slug}`);
       console.log(response);
       setProp(response.data);
     } catch (error) {
