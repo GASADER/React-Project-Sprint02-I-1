@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { axiosInstance } from "../../utils/axiosInstance.js";
+import { useSnackbar } from "notistack";
 
 import Layout from "@/components/layout";
 
@@ -14,7 +15,7 @@ const postSchema = Yup.object().shape({
   date: Yup.date()
     .max(new Date(), "Date must not be in the future")
     .required("Required"),
-  distance: Yup.number().max(30, "Over 30 ").required("Required"),
+  distance: Yup.number().max(10000, "Over 10 km. ").required("Required"),
   duration: Yup.object().shape({
     hr: Yup.number().max(24, "Over 24 ").required("Required"),
     min: Yup.number().max(60, "Over 60 ").required("Required"),
@@ -24,7 +25,7 @@ const postSchema = Yup.object().shape({
       /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
       "Cannot contain special characters"
     )
-    .max(20, "Must be 20 characters or less"),
+    .max(30, "Must be 30 characters or less"),
   description: Yup.string()
     .matches(
       /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
@@ -46,14 +47,27 @@ function readFileAsBase64(file, setImagePreview) {
 }
 
 export default function PostActivity() {
+  const { enqueueSnackbar } = useSnackbar();
   const [imagePreview, setImagePreview] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(()=>{
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/"); 
+        return;
+      }
+    }
+  })
 
   const handleSubmit = async (values, { resetForm }) => {
     const userId = localStorage.getItem('userId')
     const username = localStorage.getItem('username')
     const userImage = localStorage.getItem('userImage')
     try {
+      setLoading(true);
       const file = values.imageUrl;
       if (file) {
         const base64 = await readFileAsBase64(file, setImagePreview);
@@ -67,9 +81,11 @@ export default function PostActivity() {
       console.log(response.data);
       setImagePreview("");
       resetForm();
-      router.push("/");
+      router.back();
     } catch (error) {
       console.error(error);
+      const errorMessage = error.message;
+      enqueueSnackbar(`Edit Post failed: ${errorMessage}`, { variant: "error" })
     }
   };
 
@@ -160,7 +176,7 @@ export default function PostActivity() {
 
                   <div className="container flex gap-4 ">
                     <label htmlFor="distance" className="text-white">
-                      Distance
+                      Distance(m)
                     </label>
                     {errors.distance && touched.distance ? (
                       <div>{errors.distance}</div>
@@ -215,6 +231,7 @@ export default function PostActivity() {
                   </div>
                   <Field name="description" type="description" />
                   <button type="submit">Submit</button>
+                  {loading && <div>Loading...</div>}
                 </div>
               </Form>
             )}

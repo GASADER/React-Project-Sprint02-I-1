@@ -2,39 +2,55 @@ import React from "react";
 import Layout from "@/components/layout";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { getAuth, signInWithEmailAndPassword,browserSessionPersistence,setPersistence } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+  setPersistence,
+} from "firebase/auth";
 import { app } from "@/utils/firebaseConfig.js";
 import { useRouter } from "next/router";
+import { axiosInstance } from "../../utils/axiosInstance.js";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
-    .matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Password cannot contain special characters")
+    .matches(
+      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      "Password cannot contain special characters"
+    )
     .required("Required"),
 });
 
-
 export default function Login() {
-
   const router = useRouter();
-  
-  const handleSubmit = async (values) => {
 
+  const handleSubmit = async (values) => {
     const auth = getAuth(app);
-    setPersistence(auth, browserSessionPersistence)
+    setPersistence(auth, browserSessionPersistence);
     try {
-      console.log(values);  
+      console.log(values);
       const { email, password } = values;
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // const img = "https://res.cloudinary.com/dtg5nqs9s/image/upload/v1684895217/post_pic/smy60gr4ronxsvbkfmig.webp"
+      const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("userId", user.uid);
-      localStorage.setItem("username", user.username);
-      localStorage.setItem("userImage", user.userImage);
+      
+      const response = await axiosInstance.get(`/api/users/${user.uid}`);
+      console.log(response.data);
+      localStorage.setItem("username", response.data.username);
+      localStorage.setItem("userImage", response.data.userImage);
+
       console.log("User logged in:", userCredential.user);
-      router.push("/")
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

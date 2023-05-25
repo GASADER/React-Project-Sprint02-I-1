@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { axiosInstance } from "../utils/axiosInstance.js";
 import {
   faHeart,
   faClock,
@@ -8,10 +9,47 @@ import {
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import Popover from "./popover-card";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 
 export default function Card({ prop }) {
+  const { enqueueSnackbar } = useSnackbar();
+  console.log(prop)
   const id = typeof window !== "undefined" ? localStorage.getItem("userId"): null;
+  const token = typeof window !== "undefined" ? localStorage.getItem("token"): null;
+  const router = useRouter();
+
+  const handleEdit = (item) => {
+    try {
+      console.log("Edit");
+      console.log("Edit clicked", item._id);
+      router.push({
+        pathname: `/post/edit/${item._id}`,
+      });
+    } catch (error) {
+      console.error("Edit error:", error);
+      const errorMessage = error.message;
+      enqueueSnackbar(`Edit Post failed: ${errorMessage}`, { variant: "error" })
+    }
+  };
+
+  const handleDelete = async(item) => {
+    try {
+      console.log("Delete");
+      console.log(item);
+      console.log(item._id);
+      const response = await axiosInstance.delete(`/api/posts/${item._id}`)
+      console.log(response)
+      enqueueSnackbar("Delete Post success.", { variant: "success" });
+      window.location.reload();
+    } catch (error) {
+      const errorMessage = error.message;
+      console.error("Delete error:", error);
+      enqueueSnackbar(`Delete Post failed: ${errorMessage}`, { variant: "error" });
+    }
+  };
+
   return (
     <div className="cardContainer lg:columns-3 md:columns-2 py-4 px-2">
       {prop.map((item, index) => {
@@ -34,7 +72,7 @@ export default function Card({ prop }) {
                 </div>
                 <p className="profile-name font-bold px-2">{item.username}</p>
               </div>
-              {item.userId === id && <Popover prop={item} />}
+              {item.userId === id&& token && <Popover prop={item} onEdit={() => handleEdit(item)} onDelete={() => handleDelete(item)} />}
             </div>
             <div className="cardSection  w-full h-auto relative">
               {item.imageUrl ? (
@@ -43,7 +81,7 @@ export default function Card({ prop }) {
                   <div className="card-section-info flex flex-col justify-end h-auto absolute bottom-0 items-start text-white p-2 ">
                     <div className="card-section-distance ">
                       <FontAwesomeIcon icon={faRoad} className="px-2" />
-                      {item.distance} km
+                      {item.distance} m.
                     </div>
                     <div className="flex gap-2">
                       <div className="card-section-duration ">

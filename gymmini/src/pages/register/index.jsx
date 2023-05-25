@@ -5,18 +5,17 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useSnackbar } from "notistack";
 import { app } from "@/utils/firebaseConfig.js";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-} from "@firebase/auth";
-import { axiosInstance } from '../../utils/axiosInstance.js'
-
+import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
+import { axiosInstance } from "../../utils/axiosInstance.js";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
-    .matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Password cannot contain special characters")
+    .matches(
+      /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      "Password cannot contain special characters"
+    )
     .required("Required"),
 });
 
@@ -35,35 +34,45 @@ export default function Register() {
         values.password
       );
       const user = userCredential.user;
-      localStorage.setItem('userId', user.uid);
-      localStorage.setItem('token', user.accessToken);
+      localStorage.setItem("userId", user.uid);
+      localStorage.setItem("token", user.accessToken);
 
       console.log("User created:", userCredential.user);
-      
+
       const userInfo = {
         userId: user.uid,
         email: values.email,
         username: user.uid,
       };
-      console.log(userInfo)
-      
+      console.log(userInfo);
+
       axiosInstance
-      .post("api/users", userInfo)
-      .then(async (response) => {
-        console.log("response: ", response);
-        enqueueSnackbar("Register success.", { variant: "success" });
-        router.push("/login")
-      }).catch((error) => {
+        .post(`api/users/`, userInfo)
+        .then(async (response) => {
+          console.log("response: ", response);
+          enqueueSnackbar("Register success.", { variant: "success" });
+          router.push("/login");
+        })
+        .catch((error) => {
+          const keys = Object.keys(localStorage);
+          keys.forEach((key) => {
+            localStorage.removeItem(key);
+          });
           console.log("error: " + error.message);
           enqueueSnackbar(`Register failed: $`);
-        })} catch (error) {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setError(true);
-          console.log(errorCode, errorMessage);
-          enqueueSnackbar(`Register failed: ${errorMessage}`, { variant: "error" });
-        }
-     }
+        });
+    } catch (error) {
+      const keys = Object.keys(localStorage);
+      keys.forEach((key) => {
+        localStorage.removeItem(key);
+      });
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(true);
+      console.log(errorCode, errorMessage);
+      enqueueSnackbar(`Register failed: ${errorMessage}`, { variant: "error" });
+    }
+  };
 
   return (
     <>

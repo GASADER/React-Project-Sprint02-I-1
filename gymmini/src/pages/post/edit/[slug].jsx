@@ -32,6 +32,9 @@ const postSchema = Yup.object().shape({
     .max(220, "Must be 220 characters or less"),
 });
 
+
+
+
 function readFileAsBase64(file, setImagePreview) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -45,15 +48,19 @@ function readFileAsBase64(file, setImagePreview) {
 }
 
 export default function EditPostActivity() {
-  const [editData,setEditdata] = useState()
   const [imagePreview, setImagePreview] = useState("");
   const router = useRouter();
-  if(typeof window !== "undefined"){
-    const userId = localStorage.getItem("userId")
-    const username = localStorage.getItem("username")
-    const userImage = localStorage.getItem("userImage")
-  }
 
+  useEffect(()=>{
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/"); 
+        return;
+      }
+    }
+  })
+  
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const { slug } = router.query;
@@ -63,9 +70,17 @@ export default function EditPostActivity() {
         const base64 = await readFileAsBase64(file, setImagePreview);
         values.imageUrl = base64;
       }
-      values.userId = userId;
-      values.username = username;
-      values.userImage = userImage;
+
+      if(typeof window !== "undefined"){
+        const userId = localStorage.getItem("userId")
+        const username = localStorage.getItem("username")
+        const userImage = localStorage.getItem("userImage")
+        values.userId = userId;
+        values.username = username;
+        values.userImage = userImage;
+      }
+
+      console.log(values)
       axiosInstance
         .put(`api/posts/${slug}`, values)
         .then(async (response) => {
