@@ -119,10 +119,13 @@ export default function EditPostActivity() {
                 validationSchema={postSchema}
                 onSubmit={handleSubmit}
               >
+              
                 {({ errors, touched, setFieldValue }) => (
                   <Form className="flex flex-col gap-2">
                     <div className="container flex flex-col  gap-4 ">
+                    <label htmlFor="ChooseImg" className="text-white">Choose a picture</label>
                       <Field name="imageUrl">
+                      
                         {({ field }) => (
                           <div>
                             <input
@@ -251,7 +254,7 @@ export default function EditPostActivity() {
                         ) : null}
                       </div>
                       <Field name="description" type="description" />
-                      <button type="submit">Submit</button>
+                      <button type="submit" className=" rounded-3xl bg-cyan-500">Submit</button>
                     </div>
                   </Form>
                 )}
