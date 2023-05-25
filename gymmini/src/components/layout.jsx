@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router"; // เพิ่ม import นี้
 import Navber from "./navber";
 
+
 const Layout = ({ children }) => {
   const router = useRouter(); // เพิ่มการใช้งาน useRouter()
 
@@ -12,15 +13,15 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Navber />
-      <main className="mx-auto flex">
-        <div className="sidebar bg-blue-900 w-36 lg:w-48 flex flex-col px-8 py-4 gap-4">
-          <Link href="/profile">Profile</Link>
-          <Link href="/post">Post</Link>
+      <main className="sidebarcontainer mx-auto flex">
+        <div className="sidebar w-36 lg:w-48 flex flex-col px-8 py-4 gap-4">
           <a onClick={() => handleLinkClick("Biking")}>Biking</a>
           <a onClick={() => handleLinkClick("Walking")}>Walking</a>
           <a onClick={() => handleLinkClick("Swimming")}>Swimming</a>
           <a onClick={() => handleLinkClick("Hiking")}>Hiking</a>
           <a onClick={() => handleLinkClick("Running")}>Running</a>
+          <div className=" border border-black w-full"></div>
+          <Link href="/post">Post</Link>
         </div>
         <section className="">{children}</section>
       </main>
