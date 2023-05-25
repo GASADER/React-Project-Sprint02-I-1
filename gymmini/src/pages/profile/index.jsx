@@ -72,11 +72,11 @@ export default function profile() {
           <Loading /> 
         ) : (
       <Layout>
-        <div className="profileContainer">
+        <div className="profileContainer ">
           <div className="profileHeadContainer text-white" key={item.id}>
-            <div className="profileHead flex p-8">
-              <div className="profileimg grow debug flex flex-col items-center">
-                <div className="profileimgtitle flex-col"> Profile Details</div>
+            <div className="profileHead border rounded-lg flex m-8">
+              <div className="profileimg grow flex flex-col items-center py-4">
+                <div className="profileimgtitle flex-col mb-4"> {item.username}</div>
                 <div className="profileimgcontainer w-36 h-36 rounded-full border border-yellow-500">
                   <Image
                     className="profile-img w-full rounded-full aspect-square "
@@ -84,29 +84,40 @@ export default function profile() {
                   />
                 </div>
               </div>
-              <div className="profileinfo debug flex-col">
-                <div className="rank debug w-full">Rank {item.username}</div>
-                <div className="infodata grid grid-cols-3 grid-rows-2 auto-cols-max auto-rows-max py-2">
-                  <div className="firstName debug h-full">
-                    {item.username}
+              <div className="profileinfo flex-col p-4">
+                <div className="rank w-full">Rank Beginner</div>
+                <div className="infodata grid grid-cols-4 grid-rows-2 gap-4 auto-cols-max auto-rows-max py-2">
+                  <label htmlFor="firstName">FirstName</label>
+                  <div className="firstName h-full">
+                    {item.firstName}
                   </div>
-                  <div className="lastNameme debug h-full">
-                    {item.username}
+
+                  <label htmlFor="lastName">LastName</label>
+                  <div className="lastNameme h-full">
+                    {item.lastName}
                   </div>
-                  <div className="birthDate debug h-full">{item.username}</div>
-                  <div className="gender debug h-full">{item.username}</div>
-                  <div className="height debug h-full">{item.username}</div>
-                  <div className="weight debug h-full">{item.username}</div>
+
+                  <label htmlFor="birthDate">BirthDate</label>
+                  <div className="birthDate  h-full">{item.birthDate}</div>
+
+                  <label htmlFor="gender">Gender</label>
+                  <div className="gender  h-full">{item.gender}</div>
+
+                  <label htmlFor="height">Height</label>
+                  <div className="height  h-full">{item.height}</div>
+
+                  <label htmlFor="weight">Weight</label>
+                  <div className="weight h-full">{item.weight}</div>
                 </div>
               </div>
-              <div className="profilesetting grow debug flex items-center align-middle">
-                <button className="setting bg-red-500 rounded-2xl py-2 px-4 w-full" onClick={settingProfile}>
+              <div className="profilesetting grow  flex items-start py-8">
+                <button className="setting bg-red-500 rounded-2xl py-2 mx-4 w-full" onClick={settingProfile}>
                   {" "}
                   Setting
                 </button>
               </div>
             </div>
-            <div className="w-full border border-white "></div>
+            <div className="w-full border border-white my-4"></div>
             <div className="yourPost px-8 py-4">YourPost</div>
             <Card prop={card} />
           </div>

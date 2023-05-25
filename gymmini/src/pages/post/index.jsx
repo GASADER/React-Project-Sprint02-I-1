@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { axiosInstance } from "../../utils/axiosInstance.js";
 import { useSnackbar } from "notistack";
+import { mutate } from "swr";
 
 import Layout from "@/components/layout";
 
@@ -71,14 +72,17 @@ export default function PostActivity() {
       const file = values.imageUrl;
       if (file) {
         const base64 = await readFileAsBase64(file, setImagePreview);
+
         values.imageUrl = base64;
       }
       values.userId = userId;
       values.username = username;
       values.userImage = userImage;
       console.log(values);
+
       const response = await axiosInstance.post("/api/posts",values)
       console.log(response.data);
+      await mutate("api/posts");
       setImagePreview("");
       resetForm();
       router.back();
@@ -92,7 +96,10 @@ export default function PostActivity() {
   return (
     <>
       <Layout>
-        <div className=" flex flex-col items-center">
+      <div className=" bg-white mx-80 rounded-3xl p-4">
+
+        <div className=" flex flex-col items-center bg-purple-800 rounded-3xl p-4">
+          <div className="py-4 text-white text-3xl">Post your activity</div>
           <Formik
             initialValues={{
               imageUrl: "",
@@ -230,13 +237,14 @@ export default function PostActivity() {
                     ) : null}
                   </div>
                   <Field name="description" type="description" />
-                  <button type="submit">Submit</button>
-                  {loading && <div>Loading...</div>}
+                  <button type="submit" className=" rounded-3xl bg-cyan-500">Submit</button>
+                  {loading && <div className=" bg-slate-500">Loading...</div>}
                 </div>
               </Form>
             )}
           </Formik>
         </div>
+      </div>
       </Layout>
     </>
   );
