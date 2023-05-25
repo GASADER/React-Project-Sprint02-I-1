@@ -12,41 +12,49 @@ import Popover from "./popover-card";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 
-
 export default function Card({ prop }) {
   const { enqueueSnackbar } = useSnackbar();
-  console.log(prop)
-  const id = typeof window !== "undefined" ? localStorage.getItem("userId"): null;
-  const token = typeof window !== "undefined" ? localStorage.getItem("token"): null;
+  console.log(prop);
+  const id =
+    typeof window !== "undefined" ? localStorage.getItem("userId") : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const router = useRouter();
 
   const handleEdit = (item) => {
-    console.log(item)
+    console.log(item);
     try {
-      router.push({
-        pathname: `/post/edit/`,
-        query: { item: JSON.stringify(item) }
-      },item);
+      router.push(
+        {
+          pathname: `/post/edit/`,
+          query: { item: JSON.stringify(item) },
+        },
+        item
+      );
     } catch (error) {
       console.error("Edit error:", error);
       const errorMessage = error.message;
-      enqueueSnackbar(`Edit Post failed: ${errorMessage}`, { variant: "error" })
+      enqueueSnackbar(`Edit Post failed: ${errorMessage}`, {
+        variant: "error",
+      });
     }
   };
 
-  const handleDelete = async(item) => {
+  const handleDelete = async (item) => {
     try {
       console.log("Delete");
       console.log(item);
       console.log(item._id);
-      const response = await axiosInstance.delete(`/api/posts/${item._id}`)
-      console.log(response)
+      const response = await axiosInstance.delete(`/api/posts/${item._id}`);
+      console.log(response);
       enqueueSnackbar("Delete Post success.", { variant: "success" });
       window.location.reload();
     } catch (error) {
       const errorMessage = error.message;
       console.error("Delete error:", error);
-      enqueueSnackbar(`Delete Post failed: ${errorMessage}`, { variant: "error" });
+      enqueueSnackbar(`Delete Post failed: ${errorMessage}`, {
+        variant: "error",
+      });
     }
   };
 
@@ -70,9 +78,15 @@ export default function Card({ prop }) {
                     className="card-profile-img aspect-square rounded-full"
                   />
                 </div>
-                <p className="profile-name font-bold px-2">{item.username}</p>
+                <p className="profile-name font-bold px-2 text-ellipsis overflow-hidden">{item.username}</p>
               </div>
-              {item.userId === id&& token && <Popover prop={item} onEdit={() => handleEdit(item)} onDelete={() => handleDelete(item)} />}
+              {item.userId === id && token && (
+                <Popover
+                  prop={item}
+                  onEdit={() => handleEdit(item)}
+                  onDelete={() => handleDelete(item)}
+                />
+              )}
             </div>
             <div className="cardSection  w-full h-auto relative">
               {item.imageUrl ? (
@@ -104,14 +118,14 @@ export default function Card({ prop }) {
                     {item.distance} km
                   </div>
                   <div className="flex gap-2">
-                      <div className="card-section-duration ">
-                        <FontAwesomeIcon icon={faClock} className="px-2" />
-                        {item.duration.hr} hr
-                      </div>
-                      <div className="card-section-duration ">
-                        {item.duration.min} min
-                      </div>
+                    <div className="card-section-duration ">
+                      <FontAwesomeIcon icon={faClock} className="px-2" />
+                      {item.duration.hr} hr
                     </div>
+                    <div className="card-section-duration ">
+                      {item.duration.min} min
+                    </div>
+                  </div>
                   <button className="card-section-tag px-2 rounded-3xl border border-black text-white bg-purple-500">
                     {item.type}
                   </button>

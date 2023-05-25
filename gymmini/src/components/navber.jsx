@@ -3,6 +3,7 @@ import Link from "next/link";
 import img from "../../public/user.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import logo from '../../public/gymmini-low-resolution-logo-color-on-transparent-background.svg'
 
 
 export default function Navber() {
@@ -40,7 +41,13 @@ export default function Navber() {
     <nav className="nav px-8">
       <div className="logo-container py-4 ">
         <Link href="/">
-          <img src="/" alt="logo" id="logoimg" />
+          <Image
+            src={logo}
+            alt="logo"
+            width={80}
+            height={80}
+            className="cursor-pointer"
+          />
         </Link>
       </div>
       {isLoggedIn ? (

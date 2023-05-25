@@ -1,0 +1,28 @@
+.sidebarcontainer{
+    display: flex;
+}
+.sidebar
+{
+    background-color: #131414;
+    color: aliceblue;
+    flex-grow: 1;
+}
+@media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      height: 100vh;
+    }
+    
+    .content {
+      flex-grow: unset;
+      height: 100%;
+    }
+  }
+
+a{
+    cursor: pointer;
+}
+a:hover{
+    scale: 1.1;
+    color: rgb(168 85 247);
+}

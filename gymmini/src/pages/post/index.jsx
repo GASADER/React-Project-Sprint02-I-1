@@ -97,7 +97,6 @@ export default function PostActivity() {
     <>
       <Layout>
       <div className=" bg-white mx-80 rounded-3xl p-4">
-
         <div className=" flex flex-col items-center bg-purple-800 rounded-3xl p-4">
           <div className="py-4 text-white text-3xl">Post your activity</div>
           <Formik
@@ -116,7 +115,9 @@ export default function PostActivity() {
             {({ errors, touched, setFieldValue }) => (
               <Form className="flex flex-col gap-2">
                 <div className="container flex flex-col  gap-4 ">
-                  <Field name="imageUrl">
+
+                  <label htmlFor="ChooseImg" className="text-white">Choose a picture</label>
+                  <Field name="imageUrl" className="">
                     {({ field }) => (
                       <div>
                         <input
@@ -133,11 +134,14 @@ export default function PostActivity() {
                           }}
                         />
                         {imagePreview && (
+                          <div className="w-full ">
                           <img
                             src={imagePreview}
                             alt="Image Preview"
                             width="200"
+                            className="w-full object-scale-down "
                           />
+                          </div>
                         )}
                         {errors.imageUrl && touched.imageUrl && (
                           <div>{errors.imageUrl}</div>

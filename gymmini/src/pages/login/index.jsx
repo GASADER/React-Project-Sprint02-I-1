@@ -43,7 +43,7 @@ export default function Login() {
       const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("userId", user.uid);
-      
+
       const response = await axiosInstance.get(`/api/users/${user.uid}`);
       console.log(response.data);
       localStorage.setItem("username", response.data.username);
@@ -59,36 +59,39 @@ export default function Login() {
   return (
     <>
       <Layout>
-        <div className=" flex flex-col items-center justify-center my-40">
-          <Formik
-            initialValues={{
-              email: "",
-              password: "",
-            }}
-            validationSchema={loginSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ errors, touched }) => (
-              <Form className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-white">
-                  Email
-                </label>
-                <Field name="email" type="email" />
-                {errors.email && touched.email ? (
-                  <div>{errors.email}</div>
-                ) : null}
+        <div className=" bg-white mx-80 rounded-3xl p-4 h-full">
+          <div className=" flex flex-col items-center justify-center bg-purple-800 rounded-3xl  py-20">
+            <div className="pb-8 text-white text-3xl ">Login</div>
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              validationSchema={loginSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ errors, touched }) => (
+                <Form className="flex flex-col gap-2">
+                  <label htmlFor="email" className="text-white">
+                    Email
+                  </label>
+                  <Field name="email" type="email" />
+                  {errors.email && touched.email ? (
+                    <div>{errors.email}</div>
+                  ) : null}
 
-                <label htmlFor="password" className="text-white">
-                  Password
-                </label>
-                <Field name="password" type="password" />
-                {errors.password && touched.password ? (
-                  <div>{errors.password}</div>
-                ) : null}
-                <button type="submit">Submit</button>
-              </Form>
-            )}
-          </Formik>
+                  <label htmlFor="password" className="text-white">
+                    Password
+                  </label>
+                  <Field name="password" type="password" />
+                  {errors.password && touched.password ? (
+                    <div>{errors.password}</div>
+                  ) : null}
+                  <button type="submit" className=" rounded-3xl bg-cyan-500">Submit</button>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </Layout>
     </>

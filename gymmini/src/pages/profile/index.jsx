@@ -73,7 +73,7 @@ export default function profile() {
         ) : (
       <Layout>
         <div className="profileContainer ">
-          <div className="profileHeadContainer text-white" key={item.id}>
+          <div className="profileHeadContainer text-white text-xl" key={item.id}>
             <div className="profileHead border rounded-lg flex m-8">
               <div className="profileimg grow flex flex-col items-center py-4">
                 <div className="profileimgtitle flex-col mb-4"> {item.username}</div>
@@ -118,7 +118,7 @@ export default function profile() {
               </div>
             </div>
             <div className="w-full border border-white my-4"></div>
-            <div className="yourPost px-8 py-4">YourPost</div>
+            <div className="yourPost px-8 py-4 text-2xl">YourPost</div>
             <Card prop={card} />
           </div>
         </div>
