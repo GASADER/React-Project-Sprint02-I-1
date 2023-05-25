@@ -39,10 +39,12 @@ export default function Register() {
 
       console.log("User created:", userCredential.user);
 
+      const username = user.name || "user";
+
       const userInfo = {
         userId: user.uid,
         email: values.email,
-        username: user.uid,
+        username: username,
       };
       console.log(userInfo);
 
