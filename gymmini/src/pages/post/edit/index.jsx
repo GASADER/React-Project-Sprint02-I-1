@@ -102,6 +102,7 @@ export default function EditPostActivity() {
   return (
     <>
       <Layout>
+      <div className="w-full h-screen flex items-center justify-center">
         <div className=" bg-white mx-80 rounded-3xl p-4">
           <div className=" flex flex-col items-center bg-purple-800 rounded-3xl p-4">
             <div className="py-4 text-white text-3xl">Edit your activity</div>
@@ -260,6 +261,7 @@ export default function EditPostActivity() {
                 )}
               </Formik>
             </div>
+          </div>
           </div>
         </div>
       </Layout>

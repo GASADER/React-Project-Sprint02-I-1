@@ -79,15 +79,16 @@ export default function EditProfile() {
 
   return (
     <Layout>
-      <div className=" bg-white mx-80 rounded-3xl p-4">
-        <div className=" flex flex-col items-center bg-purple-800 rounded-3xl p-4">
-          <div className="py-4 text-white text-3xl">Edit your profile</div>
-          <div className="flex flex-col items-center">
-            <form
-              className="flex flex-col gap-2"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              {/* <div>
+      <div className="w-full h-screen flex items-center justify-center">
+        <div className=" bg-white mx-80 rounded-3xl p-4">
+          <div className=" flex flex-col items-center bg-purple-800 rounded-3xl p-4">
+            <div className="py-4 text-white text-3xl">Edit your profile</div>
+            <div className="flex flex-col items-center">
+              <form
+                className="flex flex-col gap-2"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                {/* <div>
             <input
               type="file"
               className="text-white"
@@ -96,97 +97,100 @@ export default function EditProfile() {
             {imagePreview && <img src={imagePreview} alt="Image Preview" width="200" />}
             {errors.userImage && <div className="text-red-500">{errors.userImage.message}</div>}
           </div> */}
-              <label htmlFor="username" className="text-white">
-                Username
-              </label>
-              <input {...register("username")} name="username" />
-              {errors.username && (
-                <div className="text-red-500">{errors.username.message}</div>
-              )}
-              <label htmlFor="firstName" className="text-white">
-                First Name
-              </label>
-              <input {...register("firstName")} name="firstName" />
-              {errors.firstName && (
-                <div className="text-red-500">{errors.firstName.message}</div>
-              )}
-
-              <label htmlFor="lastName" className="text-white">
-                Last Name
-              </label>
-              <input {...register("lastName")} name="lastName" />
-              {errors.lastName && (
-                <div className="text-red-500">{errors.lastName.message}</div>
-              )}
-
-              <label htmlFor="email" className="text-white">
-                Email
-              </label>
-              <input {...register("email")} type="email" name="email" />
-              {errors.email && (
-                <div className="text-red-500">{errors.email.message}</div>
-              )}
-
-              <div className="text-black">
-                <label htmlFor="birthDate" className="text-white pr-2">
-                  Birth Date
+                <label htmlFor="username" className="text-white">
+                  Username
                 </label>
-                <input
-                  {...register("birthDate")}
-                  type="date"
-                  max={new Date().toISOString().split("T")[0]}
-                  name="birthDate"
-                />
-                {errors.birthDate && (
-                  <div className="text-red-500">{errors.birthDate.message}</div>
+                <input {...register("username")} name="username" />
+                {errors.username && (
+                  <div className="text-red-500">{errors.username.message}</div>
                 )}
-              </div>
+                <label htmlFor="firstName" className="text-white">
+                  First Name
+                </label>
+                <input {...register("firstName")} name="firstName" />
+                {errors.firstName && (
+                  <div className="text-red-500">{errors.firstName.message}</div>
+                )}
 
-              <label htmlFor="gender" className="text-white">
-                Gender
-              </label>
-              <select
-                {...register("gender")}
-                className="text-black"
-                name="gender"
-              >
-                <option value="">Select a gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-              {errors.gender && (
-                <div className="text-red-500">{errors.gender.message}</div>
-              )}
+                <label htmlFor="lastName" className="text-white">
+                  Last Name
+                </label>
+                <input {...register("lastName")} name="lastName" />
+                {errors.lastName && (
+                  <div className="text-red-500">{errors.lastName.message}</div>
+                )}
 
-              <label htmlFor="city" className="text-white">
-                City
-              </label>
-              <input {...register("city")} name="city" />
-              {errors.city && (
-                <div className="text-red-500">{errors.city.message}</div>
-              )}
+                <label htmlFor="email" className="text-white">
+                  Email
+                </label>
+                <input {...register("email")} type="email" name="email" />
+                {errors.email && (
+                  <div className="text-red-500">{errors.email.message}</div>
+                )}
 
-              <label htmlFor="height" className="text-white">
-                Height
-              </label>
-              <input {...register("height")} type="number" name="height" />
-              {errors.height && (
-                <div className="text-red-500">{errors.height.message}</div>
-              )}
+                <div className="text-black">
+                  <label htmlFor="birthDate" className="text-white pr-2">
+                    Birth Date
+                  </label>
+                  <input
+                    {...register("birthDate")}
+                    type="date"
+                    max={new Date().toISOString().split("T")[0]}
+                    name="birthDate"
+                  />
+                  {errors.birthDate && (
+                    <div className="text-red-500">
+                      {errors.birthDate.message}
+                    </div>
+                  )}
+                </div>
 
-              <label htmlFor="weight" className="text-white">
-                Weight
-              </label>
-              <input {...register("weight")} type="number" name="weight" />
-              {errors.weight && (
-                <div className="text-red-500">{errors.weight.message}</div>
-              )}
+                <label htmlFor="gender" className="text-white">
+                  Gender
+                </label>
+                <select
+                  {...register("gender")}
+                  className="text-black"
+                  name="gender"
+                >
+                  <option value="">Select a gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                {errors.gender && (
+                  <div className="text-red-500">{errors.gender.message}</div>
+                )}
 
-              <button type="submit" className=" rounded-3xl bg-cyan-500">
-                Submit
-              </button>
-            </form>
+                <label htmlFor="city" className="text-white">
+                  City
+                </label>
+                <input {...register("city")} name="city" />
+                {errors.city && (
+                  <div className="text-red-500">{errors.city.message}</div>
+                )}
+
+                <label htmlFor="height" className="text-white">
+                  Height
+                </label>
+                <input {...register("height")} type="number" name="height" />
+                {errors.height && (
+                  <div className="text-red-500">{errors.height.message}</div>
+                )}
+
+                <label htmlFor="weight" className="text-white">
+                  Weight
+                </label>
+                <input {...register("weight")} type="number" name="weight" />
+                {errors.weight && (
+                  <div className="text-red-500">{errors.weight.message}</div>
+                )}
+
+                <button type="submit" className=" rounded-3xl bg-cyan-500">
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

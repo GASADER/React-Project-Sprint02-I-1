@@ -17,7 +17,8 @@ export default function FindType() {
   const fetchData = async () => {
     try {
       const { slug } = router.query; 
-      const response = await axiosInstance.get(`/api/posts/posts?activity=${slug}`);
+      console.log(slug)
+      const response = await axiosInstance.get(`/api/posts/?activity=${slug}`);
       console.log(response);
       setProp(response.data);
     } catch (error) {
