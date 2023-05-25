@@ -79,10 +79,10 @@ export default function Register() {
   return (
     <>
       <Layout className="">
-        <div className="w-full h-screen flex items-center justify-center">
-          <div className=" bg-white mx-80 rounded-3xl p-4 h-full">
-            <div className=" flex flex-col items-center justify-center bg-purple-800 rounded-3xl  py-20">
-              <div className="pb-8 text-white text-3xl ">Register</div>
+      <div className="w-full h-screen flex items-center justify-center">
+        <div className=" bg-white  rounded-3xl p-4 h-auto">
+        <div className="  flex flex-col items-center justify-center bg-purple-800 rounded-3xl  p-20">
+              <div className="pb-16 text-white text-3xl ">Register</div>
               <Formik
                 initialValues={{
                   email: "",
