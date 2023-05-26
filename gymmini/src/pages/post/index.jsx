@@ -16,10 +16,10 @@ const postSchema = Yup.object().shape({
   date: Yup.date()
     .max(new Date(), "Date must not be in the future")
     .required("Required"),
-  distance: Yup.number().max(10000, "Over 10 km. ").required("Required"),
+  distance: Yup.number().min(0).max(10000, "Over 10 km. ").required("Required"),
   duration: Yup.object().shape({
-    hr: Yup.number().max(24, "Over 24 ").required("Required"),
-    min: Yup.number().max(60, "Over 60 ").required("Required"),
+    hr: Yup.number().min(0).max(24, "Over 24 ").required("Required"),
+    min: Yup.number().min(0).max(60, "Over 60 ").required("Required"),
   }),
   title: Yup.string()
     .matches(
