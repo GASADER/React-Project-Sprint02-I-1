@@ -68,7 +68,7 @@ export default function Card({ prop }) {
         }
         return (
           <div
-            className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block px-2 hover:"
+            className="card border-2 border-solid border-black h-auto rounded-3xl w-full mb-4 text-white inline-block px-2 hover:border-purple-500"
             key={index}
           >
             <div className="cardHeader w-auto h-auto flex justify-between rounded-t-3xl px-2 py-2 ">
