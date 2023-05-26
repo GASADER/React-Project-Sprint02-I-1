@@ -5,11 +5,7 @@
     background-color: #141414;
 
 }
-.card:hover
-{
-    scale: 1.01;
 
-}
 .card-section-info
 {
     -webkit-text-stroke: 0.1px black;
