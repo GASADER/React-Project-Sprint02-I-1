@@ -84,6 +84,7 @@ export default function PostActivity() {
       console.log(response.data);
       await mutate("api/posts");
       setImagePreview("");
+      enqueueSnackbar("Edit success.", { variant: "success" });
       resetForm();
       router.back();
     } catch (error) {

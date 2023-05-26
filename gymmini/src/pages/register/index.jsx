@@ -8,6 +8,7 @@ import { app } from "@/utils/firebaseConfig.js";
 import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
 import { axiosInstance } from "../../utils/axiosInstance.js";
 
+
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
@@ -58,7 +59,7 @@ export default function Register() {
             localStorage.removeItem(key);
           });
           console.log("error: " + error.message);
-          enqueueSnackbar(`Register failed: $`);
+          enqueueSnackbar(`Register failed: ${errorMessage}`, { variant: "error" });
         });
     } catch (error) {
       const keys = Object.keys(localStorage);
