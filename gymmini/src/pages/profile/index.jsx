@@ -131,7 +131,7 @@ export default function profile() {
                 </div>
               </div>
               <div className="profilesetting grow  flex items-start py-8">
-                <button className="setting bg-red-500 rounded-2xl py-2 mx-4 w-full" onClick={settingProfile}>
+                <button className="setting bg-red-500 rounded-2xl py-2 mx-4 w-full hover:text-red-500 hover:bg-white" onClick={settingProfile}>
                   {" "}
                   Setting
                 </button>
