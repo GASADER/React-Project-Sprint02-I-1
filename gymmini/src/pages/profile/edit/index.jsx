@@ -53,7 +53,6 @@ export default function EditProfile() {
   const onSubmit = async (data) => {
     try {
       const values = { ...data };
-      console.log(data);
 
       if (typeof window !== "undefined") {
         const userId = localStorage.getItem("userId");
@@ -67,7 +66,6 @@ export default function EditProfile() {
       axiosInstance
         .put(`api/users/${values.userId}`, values)
         .then(async (response) => {
-          console.log(response.data);
           setImagePreview("");
           router.back();
         })

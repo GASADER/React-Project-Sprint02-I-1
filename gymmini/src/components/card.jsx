@@ -28,7 +28,6 @@ export default function Card({ prop }) {
 
 
   const handleEdit = (item) => {
-    console.log(item);
     try {
       router.push(
         {
@@ -49,10 +48,7 @@ export default function Card({ prop }) {
   const handleDelete = async (item) => {
     try {
       console.log("Delete");
-      console.log(item);
-      console.log(item._id);
       const response = await axiosInstance.delete(`/api/posts/${item._id}`);
-      console.log(response);
       enqueueSnackbar("Delete Post success.", { variant: "success" });
       window.location.reload();
     } catch (error) {
@@ -149,7 +145,7 @@ export default function Card({ prop }) {
                 <div className="discaptions">{item.description}</div>
               </div>
             </div>
-            <div className="cardFooter w-full h-auto p-2 ">
+            {/* <div className="cardFooter w-full h-auto p-2 ">
               <div className="cardFooter-container flex justify-between p-2">
                 <div className="like-comment flex gap-4 "> 
                   <button>
@@ -178,7 +174,7 @@ export default function Card({ prop }) {
                   </div>
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         );
       })}

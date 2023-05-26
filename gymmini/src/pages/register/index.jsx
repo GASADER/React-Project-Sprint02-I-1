@@ -25,7 +25,6 @@ export default function Register() {
 
   const handleSubmit = async (values) => {
     try {
-      console.log(values);
 
       const auth = getAuth(app);
       const userCredential = await createUserWithEmailAndPassword(
@@ -37,7 +36,6 @@ export default function Register() {
       localStorage.setItem("userId", user.uid);
       localStorage.setItem("token", user.accessToken);
 
-      console.log("User created:", userCredential.user);
 
       const username = user.name || "user";
 
@@ -46,7 +44,6 @@ export default function Register() {
         email: values.email,
         username: username,
       };
-      console.log(userInfo);
 
       axiosInstance
         .post(`api/users/`, userInfo)

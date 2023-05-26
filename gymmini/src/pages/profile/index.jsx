@@ -12,6 +12,7 @@ export default function profile() {
   const [username, setUsername] = useState("");
   const [userImage, setUserimage] = useState("");
   const [responseData, setResponseData] = useState(null);
+  const [responsePost, setResponsePost] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -43,9 +44,11 @@ export default function profile() {
 
       try {
         setIsLoading(true)
-        const response = await axiosInstance.get(`/api/users/${userId}`);
-        console.log(response.data);
-        setResponseData(response.data);
+        const responseUser = await axiosInstance.get(`/api/users/${userId}`);
+        const responsePost = await axiosInstance.get(`/api/users/${userId}/posts`);
+        setResponseData(responseUser.data);
+        setResponsePost(responsePost.data);
+
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -75,8 +78,10 @@ export default function profile() {
   weight: responseData ? responseData.weight : ""
   };
 
-  const data = responseData ? [responseData] : [];
-  const card = data.flat()
+  
+  const dataPost = responsePost ? [responsePost] : [];
+
+  const card = dataPost.flat()
   
   return (
     <>
