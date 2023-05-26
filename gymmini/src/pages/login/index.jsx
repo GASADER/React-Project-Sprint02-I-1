@@ -56,8 +56,9 @@ export default function Login() {
       router.push("/");
     } catch (error) {
       console.error(error);
+      const errorMessage = error.message;
       enqueueSnackbar(errorMessage, { variant: "error" });
-    }
+    } 
   };
 
   return (

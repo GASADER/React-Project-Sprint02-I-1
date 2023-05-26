@@ -100,6 +100,7 @@ export default function EditProfile() {
         });
     } catch (error) {
       console.error(error);
+      const errorMessage = error.message;
       enqueueSnackbar(`Edit failed: ${errorMessage}`, { variant: "error" });
     }
   };
