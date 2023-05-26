@@ -14,7 +14,6 @@ export default function Home() {
   const fetchData = async () => {
     try {
       const response = await axiosInstance.get("/api/posts"); 
-      console.log(response)
       setProp(response.data);
     } catch (error) {
       console.log("Error fetching data:", error);

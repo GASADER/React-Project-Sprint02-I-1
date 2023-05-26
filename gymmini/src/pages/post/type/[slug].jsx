@@ -17,9 +17,7 @@ export default function FindType() {
 
   const fetchData = async () => {
     try {
-      console.log(slug)
       const response = await axiosInstance.get(`/api/posts/?activity=${slug}`);
-      console.log(response);
       setProp(response.data);
     } catch (error) {
       console.log("Error fetching data:", error);

@@ -13,20 +13,20 @@ const postSchema = Yup.object().shape({
   date: Yup.date()
     .max(new Date(), "Date must not be in the future")
     .required("Required"),
-  distance: Yup.number().max(30, "Over 30 ").required("Required"),
+  distance: Yup.number().max(10000, "Over 10 km. ").required("Required"),
   duration: Yup.object().shape({
     hr: Yup.number().max(24, "Over 24 ").required("Required"),
     min: Yup.number().max(60, "Over 60 ").required("Required"),
   }),
   title: Yup.string()
     .matches(
-      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
       "Cannot contain special characters"
     )
     .max(20, "Must be 20 characters or less"),
   description: Yup.string()
     .matches(
-      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
       "Cannot contain special characters"
     )
     .max(220, "Must be 220 characters or less"),
@@ -58,9 +58,6 @@ export default function EditPostActivity() {
         router.push("/");
         return;
       }
-      if (itemId) {
-        console.log(itemId);
-      }
     }
   }, [itemId]);
 
@@ -86,8 +83,7 @@ export default function EditPostActivity() {
       axiosInstance
         .put(`api/posts/${itemId}`, values)
         .then(async (response) => {
-          console.log(response.data);
-          setImagePreview("");
+            setImagePreview("");
           resetForm();
           router.push("/");
         })
@@ -199,7 +195,7 @@ export default function EditPostActivity() {
 
                       <div className="container flex gap-4 ">
                         <label htmlFor="distance" className="text-white">
-                          Distance
+                          Distance(m)
                         </label>
                         {errors.distance && touched.distance ? (
                           <div>{errors.distance}</div>

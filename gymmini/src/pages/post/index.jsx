@@ -23,13 +23,13 @@ const postSchema = Yup.object().shape({
   }),
   title: Yup.string()
     .matches(
-      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
       "Cannot contain special characters"
     )
     .max(30, "Must be 30 characters or less"),
   description: Yup.string()
     .matches(
-      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
       "Cannot contain special characters"
     )
     .max(220, "Must be 220 characters or less"),
