@@ -5,15 +5,38 @@ import { useRouter } from "next/router";
 import { axiosInstance } from "../../../utils/axiosInstance.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSnackbar } from "notistack";
 
 const userSchema = Yup.object().shape({
-  username: Yup.string(),
+  username: Yup.string()
+    .max(30, "Over 30 ")
+    .matches(
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
+      "Cannot contain special characters"
+    ),
   userImage: Yup.string(),
   email: Yup.string().email("Invalid email address"),
-  firstName: Yup.string().max(50, "Must be 50 characters or less"),
-  lastName: Yup.string().max(50, "Must be 50 characters or less"),
+  firstName: Yup.string()
+    .max(50, "Must be 50 characters or less")
+    .matches(
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
+      "Cannot contain special characters"
+    ),
+  lastName: Yup.string()
+    .max(50, "Must be 50 characters or less")
+    .matches(
+      /^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?ก-ฮะาิีึืุูเแโใไ็่้๊๋์โทณฑ์ำ]*$/,
+      "Cannot contain special characters"
+    ),
   birthDate: Yup.date()
-    .max(new Date(), "Birth date can't be in the future")
+    .max(
+      new Date(
+        new Date().getFullYear() - 15,
+        new Date().getMonth(),
+        new Date().getDate()
+      ),
+      "Must be at least 15 years old"
+    )
     .min(new Date("1900-01-01"), "Invalid birth date"),
   gender: Yup.string().oneOf(["male", "female", "other"]),
   city: Yup.string(),
@@ -22,6 +45,7 @@ const userSchema = Yup.object().shape({
 });
 
 export default function EditProfile() {
+  const { enqueueSnackbar } = useSnackbar();
   const [imagePreview, setImagePreview] = useState("");
   const {
     handleSubmit,
@@ -67,13 +91,17 @@ export default function EditProfile() {
         .put(`api/users/${values.userId}`, values)
         .then(async (response) => {
           setImagePreview("");
+          enqueueSnackbar("Edit success.", { variant: "success" });
           router.back();
         })
         .catch((error) => {
           console.error(error);
+          enqueueSnackbar(`Edit failed: ${errorMessage}`, { variant: "error" });
         });
     } catch (error) {
       console.error(error);
+      const errorMessage = error.message;
+      enqueueSnackbar(`Edit failed: ${errorMessage}`, { variant: "error" });
     }
   };
 
@@ -141,7 +169,15 @@ export default function EditProfile() {
                   <input
                     {...register("birthDate")}
                     type="date"
-                    max={new Date().toISOString().split("T")[0]}
+                    max={
+                      new Date(
+                        new Date().getFullYear() - 15,
+                        new Date().getMonth(),
+                        new Date().getDate()
+                      )
+                        .toISOString()
+                        .split("T")[0]
+                    }
                     name="birthDate"
                   />
                   {errors.birthDate && (

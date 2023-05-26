@@ -11,6 +11,7 @@ import {
 import { app } from "@/utils/firebaseConfig.js";
 import { useRouter } from "next/router";
 import { axiosInstance } from "../../utils/axiosInstance.js";
+import { useSnackbar } from "notistack";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -25,6 +26,7 @@ const loginSchema = Yup.object().shape({
 
 export default function Login() {
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (values) => {
     const auth = getAuth(app);
@@ -41,6 +43,7 @@ export default function Login() {
 
       // const img = "https://res.cloudinary.com/dtg5nqs9s/image/upload/v1684895217/post_pic/smy60gr4ronxsvbkfmig.webp"
       const user = userCredential.user;
+      enqueueSnackbar("Login success.", { variant: "success" });
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("userId", user.uid);
 
@@ -53,7 +56,9 @@ export default function Login() {
       router.push("/");
     } catch (error) {
       console.error(error);
-    }
+      const errorMessage = error.message;
+      enqueueSnackbar(errorMessage, { variant: "error" });
+    } 
   };
 
   return (
